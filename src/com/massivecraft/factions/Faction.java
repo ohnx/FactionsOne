@@ -24,14 +24,20 @@ public class Faction extends Entity implements EconomyParticipator
 
 	// FIELD: fplayers
 	// speedy lookup of players in faction
-	private transient Set<FPlayer> fplayers = new HashSet<FPlayer>();
+	private transient Set<FPlayer> fplayers = new HashSet<>();
 
 	// FIELD: invites
 	// Where string is a lowercase player name
 	private Set<String> invites; 
-	public void invite(FPlayer fplayer) { this.invites.add(fplayer.getId().toLowerCase()); }
-	public void deinvite(FPlayer fplayer) { this.invites.remove(fplayer.getId().toLowerCase()); }
-	public boolean isInvited(FPlayer fplayer) { return this.invites.contains(fplayer.getId().toLowerCase()); }
+	public Set<String> getInvites() {
+		         return invites;
+		     }
+	public void invite(FPlayer fplayer) { 
+		this.invites.add(fplayer.getId()); }
+	public void deinvite(FPlayer fplayer) { 
+		this.invites.remove(fplayer.getId()); }
+	public boolean isInvited(FPlayer fplayer) { 
+		return this.invites.contains(fplayer.getId()); }
 	
 	// FIELD: open
 	private boolean open;
@@ -195,7 +201,7 @@ public class Faction extends Entity implements EconomyParticipator
 	
 	public Faction()
 	{
-		this.relationWish = new HashMap<String, Rel>();
+		this.relationWish = new HashMap<>();
 		this.invites = new HashSet<String>();
 		this.open = Conf.newFactionsDefaultOpen;
 		this.tag = "???";
@@ -401,7 +407,7 @@ public class Faction extends Entity implements EconomyParticipator
 	public Set<FPlayer> getFPlayers()
 	{
 		// return a shallow copy of the FPlayer list, to prevent tampering and concurrency issues
-		Set<FPlayer> ret = new HashSet<FPlayer>(fplayers);
+		Set<FPlayer> ret = new HashSet<>(fplayers);
 		return ret;
 	}
 	
@@ -436,7 +442,7 @@ public class Faction extends Entity implements EconomyParticipator
 	
 	public ArrayList<FPlayer> getFPlayersWhereRole(Rel role)
 	{
-		ArrayList<FPlayer> ret = new ArrayList<FPlayer>();
+		ArrayList<FPlayer> ret = new ArrayList<>();
 		//if ( ! this.isNormal()) return ret;
 		
 		for (FPlayer fplayer : fplayers)
@@ -452,7 +458,7 @@ public class Faction extends Entity implements EconomyParticipator
 	
 	public ArrayList<Player> getOnlinePlayers()
 	{
-		ArrayList<Player> ret = new ArrayList<Player>();
+		ArrayList<Player> ret = new ArrayList<>();
 		//if (this.isPlayerFreeType()) return ret;
 
 		for (Player player: P.p.getServer().getOnlinePlayers())

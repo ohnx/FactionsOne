@@ -2,10 +2,12 @@ package com.massivecraft.factions;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import com.massivecraft.factions.event.FPlayerLeaveEvent;
@@ -193,7 +195,12 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 	//----------------------------------------------//
 	public String getName()
 	{
-		return getId();
+		if(isOnline()) {
+			             return getPlayer().getName();
+			         }
+		/*OfflinePlayer player = Bukkit.getOfflinePlayer(UUID.fromString(getId()));
+		         return player.getName() != null ? player.getName() : getId();*/
+		         return getId();
 	}
 	
 	public String getTag()

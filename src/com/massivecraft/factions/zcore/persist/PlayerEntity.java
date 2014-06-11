@@ -9,7 +9,10 @@ public class PlayerEntity extends Entity
 {
 	public Player getPlayer()
 	{
-		return Bukkit.getPlayerExact(this.getId());
+		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+			             if (player.getUniqueId().toString().equals(this.getId())) return player;
+			         }
+			         return null;
 	}
 	
 	public boolean isOnline()

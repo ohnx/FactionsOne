@@ -224,17 +224,16 @@ public class FactionsPlayerListener implements Listener
 		String name = player.getName();
 		if (Conf.playersWhoBypassAllProtection.contains(name)) return true;
 
-		FPlayer me = FPlayers.i.get(name);
+		FPlayer me = FPlayers.i.get(player);
 		if (me.hasAdminMode()) return true;
 		if (Conf.materialsEditTools.contains(material) && ! FPerm.BUILD.has(me, loc, ! justCheck)) return false;
 		return true;
 	}
 	public static boolean canPlayerUseBlock(Player player, Block block, boolean justCheck)
 	{
-		String name = player.getName();
-		if (Conf.playersWhoBypassAllProtection.contains(name)) return true;
+		if (Conf.playersWhoBypassAllProtection.contains(player.getName())) return true;
 
-		FPlayer me = FPlayers.i.get(name);
+		FPlayer me = FPlayers.i.get(player);
 		if (me.hasAdminMode()) return true;
 		Location loc = block.getLocation();
 		Material material = block.getType();
