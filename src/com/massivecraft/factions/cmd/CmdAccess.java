@@ -1,5 +1,8 @@
 package com.massivecraft.factions.cmd;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import com.massivecraft.factions.Board;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.FLocation;
