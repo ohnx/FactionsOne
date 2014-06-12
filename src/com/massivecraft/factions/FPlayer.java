@@ -198,9 +198,8 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		if(isOnline()) {
 			             return getPlayer().getName();
 			         }
-		/*OfflinePlayer player = Bukkit.getOfflinePlayer(UUID.fromString(getId()));
-		         return player.getName() != null ? player.getName() : getId();*/
-		         return getId();
+		OfflinePlayer player = Bukkit.getOfflinePlayer(UUID.fromString(getId()));
+		         return player.getName() != null ? player.getName() : getId();
 	}
 	
 	public String getTag()
