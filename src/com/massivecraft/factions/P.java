@@ -23,13 +23,11 @@ import com.massivecraft.factions.integration.herochat.HerochatFeatures;
 import com.massivecraft.factions.integration.Econ;
 import com.massivecraft.factions.integration.EssentialsFeatures;
 import com.massivecraft.factions.integration.LWCFeatures;
-import com.massivecraft.factions.integration.SpoutFeatures;
 import com.massivecraft.factions.integration.Worldguard;
 import com.massivecraft.factions.listeners.FactionsBlockListener;
 import com.massivecraft.factions.listeners.FactionsChatListener;
 import com.massivecraft.factions.listeners.FactionsEntityListener;
 import com.massivecraft.factions.listeners.FactionsExploitListener;
-import com.massivecraft.factions.listeners.FactionsAppearanceListener;
 import com.massivecraft.factions.listeners.FactionsPlayerListener;
 import com.massivecraft.factions.listeners.FactionsServerListener;
 import com.massivecraft.factions.struct.FFlag;
@@ -58,7 +56,6 @@ public class P extends MPlugin
 	public final FactionsExploitListener exploitListener;
 	public final FactionsBlockListener blockListener;
 	public final FactionsServerListener serverListener;
-	public final FactionsAppearanceListener appearanceListener;
 	
 	// Persistance related
 	private boolean locked = false;
@@ -80,7 +77,6 @@ public class P extends MPlugin
 		this.exploitListener = new FactionsExploitListener();
 		this.blockListener = new FactionsBlockListener(this);
 		this.serverListener = new FactionsServerListener(this);
-		this.appearanceListener = new FactionsAppearanceListener(this);
 	}
 
 	@Override
@@ -112,7 +108,6 @@ public class P extends MPlugin
 		this.cmdBase = new FCmdRoot();
 
 		EssentialsFeatures.setup();
-		SpoutFeatures.setup();
 		Econ.setup();
 		CapiFeatures.setup();
 		HerochatFeatures.setup();
@@ -136,7 +131,6 @@ public class P extends MPlugin
 		getServer().getPluginManager().registerEvents(this.exploitListener, this);
 		getServer().getPluginManager().registerEvents(this.blockListener, this);
 		getServer().getPluginManager().registerEvents(this.serverListener, this);
-		getServer().getPluginManager().registerEvents(this.appearanceListener, this);
 
 		postEnable();
 		this.loadSuccessful = true;

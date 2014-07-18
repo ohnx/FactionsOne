@@ -31,7 +31,6 @@ import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.P;
-import com.massivecraft.factions.integration.SpoutFeatures;
 import com.massivecraft.factions.struct.FFlag;
 import com.massivecraft.factions.struct.FPerm;
 import com.massivecraft.factions.struct.Rel;
@@ -58,7 +57,6 @@ public class FactionsPlayerListener implements Listener
 
 		// Store player's current FLocation and notify them where they are
 		me.setLastStoodAt(new FLocation(event.getPlayer().getLocation()));
-		if ( ! SpoutFeatures.updateTerritoryDisplay(me))
 			me.sendFactionHereMessage();
 		
 		// Set NoBoom timer update.
@@ -80,7 +78,6 @@ public class FactionsPlayerListener implements Listener
 		// and update their last login time to point to when the logged off, for auto-remove routine
 		me.setLastLoginTime(System.currentTimeMillis());
 
-		SpoutFeatures.playerDisconnect(me);
 		
 		// Set NoBoom timer update.
 		Faction faction = me.getFaction();
@@ -125,7 +122,7 @@ public class FactionsPlayerListener implements Listener
 		boolean changedFaction = (Board.getFactionAt(from) != access.getHostFaction());
 
 		// let Spout handle most of this if it's available
-		boolean handledBySpout = changedFaction && SpoutFeatures.updateTerritoryDisplay(me);
+		boolean handledBySpout = changedFaction;
 		
 		if (me.isMapAutoUpdating())
 		{
@@ -137,7 +134,7 @@ public class FactionsPlayerListener implements Listener
 		}
 
 		// show access info message if needed
-		if ( ! handledBySpout && ! SpoutFeatures.updateAccessInfo(me) && ! access.isDefault())
+		if ( ! handledBySpout && ! access.isDefault())
 		{
 			if (access.subjectHasAccess(me))
 				me.msg("<g>You have access to this area.");
@@ -151,6 +148,7 @@ public class FactionsPlayerListener implements Listener
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerInteract(PlayerInteractEvent event)
 	{
@@ -373,8 +371,6 @@ public class FactionsPlayerListener implements Listener
 		{
 			return;
 		}
-
-		SpoutFeatures.playerDisconnect(badGuy);
 
 		// if player was banned (not just kicked), get rid of their stored info
 		if (Conf.removePlayerDataWhenBanned && event.getReason().equals("Banned by admin."))

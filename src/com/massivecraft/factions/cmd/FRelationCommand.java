@@ -5,7 +5,6 @@ import org.bukkit.Bukkit;
 import com.massivecraft.factions.Conf;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.event.FactionRelationEvent;
-import com.massivecraft.factions.integration.SpoutFeatures;
 import com.massivecraft.factions.struct.FFlag;
 import com.massivecraft.factions.struct.Permission;
 import com.massivecraft.factions.struct.Rel;
@@ -92,9 +91,5 @@ public abstract class FRelationCommand extends FCommand
 			them.msg("<i>This will have no effect while their faction is peaceful.");
 			myFaction.msg("<i>This will have no effect while your faction is peaceful.");
 		}
-
-		SpoutFeatures.updateTitle(myFaction, them);
-		SpoutFeatures.updateTitle(them, myFaction);
-		SpoutFeatures.updateTerritoryDisplayLoc(null);
 	}
 }

@@ -7,7 +7,6 @@ import com.massivecraft.factions.Board;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.FLocation;
 import com.massivecraft.factions.FPlayer;
-import com.massivecraft.factions.integration.SpoutFeatures;
 import com.massivecraft.factions.struct.FPerm;
 import com.massivecraft.factions.struct.Permission;
 import com.massivecraft.factions.struct.TerritoryAccess;
@@ -92,7 +91,6 @@ public class CmdAccess extends FCommand
 		}
 
 		msg("<i>%s has been %s<i> the access list for this territory.", target, TextUtil.parseColor(added ? "<lime>added to" : "<rose>removed from"));
-		SpoutFeatures.updateAccessInfoLoc(loc);
 		showAccessList(territory, locFaction);
 	}
 

@@ -7,7 +7,6 @@ import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.server.PluginEnableEvent;
 
 import com.massivecraft.factions.P;
-import com.massivecraft.factions.integration.SpoutFeatures;
 
 
 public class FactionsServerListener implements Listener
@@ -21,12 +20,10 @@ public class FactionsServerListener implements Listener
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPluginDisable(PluginDisableEvent event)
 	{
-		SpoutFeatures.setup();
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPluginEnable(PluginEnableEvent event)
 	{
-		SpoutFeatures.setup();
 	}
 }

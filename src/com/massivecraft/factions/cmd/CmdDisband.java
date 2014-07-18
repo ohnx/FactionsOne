@@ -10,7 +10,6 @@ import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.P;
 import com.massivecraft.factions.FPlayer;
-import com.massivecraft.factions.integration.SpoutFeatures;
 import com.massivecraft.factions.struct.FFlag;
 import com.massivecraft.factions.struct.FPerm;
 import com.massivecraft.factions.struct.Permission;
@@ -91,7 +90,6 @@ public class CmdDisband extends FCommand
 		
 		faction.detach();
 
-		SpoutFeatures.updateTitle(null, null);
-		SpoutFeatures.updateCape(null, null);
+
 	}
 }
