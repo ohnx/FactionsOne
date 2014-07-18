@@ -337,7 +337,7 @@ public class FactionsEntityListener implements Listener
 			}
 			return false;
 		}
-
+/*
 		// Damage will be dealt. However check if the damage should be reduced.
 		if (damage > 0.0 && defender.hasFaction() && ownTerritory && Conf.territoryShieldFactor > 0)
 		{
@@ -350,7 +350,7 @@ public class FactionsEntityListener implements Listener
 				String perc = MessageFormat.format("{0,number,#%}", (Conf.territoryShieldFactor)); // TODO does this display correctly??
 				defender.msg("<i>Enemy damage reduced by <rose>%s<i>.", perc);
 			}
-		}
+		}*/
 
 		return true;
 	}
