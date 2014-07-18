@@ -35,11 +35,11 @@ public abstract class FRelationCommand extends FCommand
 		Faction them = this.argAsFaction(0);
 		if (them == null) return;
 		
-		/*if ( ! them.isNormal())
+		if ( ! them.isNormal())
 		{
 			msg("<b>Nope! You can't.");
 			return;
-		}*/
+		}
 		
 		if (them == myFaction)
 		{
