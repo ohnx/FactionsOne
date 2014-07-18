@@ -20,7 +20,6 @@ import com.massivecraft.factions.adapters.RelTypeAdapter;
 import com.massivecraft.factions.cmd.*;
 import com.massivecraft.factions.integration.Econ;
 import com.massivecraft.factions.integration.Essentials;
-import com.massivecraft.factions.integration.LWCFeatures;
 import com.massivecraft.factions.integration.Worldguard;
 import com.massivecraft.factions.listeners.FactionsBlockListener;
 import com.massivecraft.factions.listeners.FactionsChatListener;
@@ -107,7 +106,6 @@ public class P extends MPlugin
 
 		Essentials.setup();
 		Econ.setup();
-		LWCFeatures.setup();
 		
 		if(Conf.worldGuardChecking)
 		{

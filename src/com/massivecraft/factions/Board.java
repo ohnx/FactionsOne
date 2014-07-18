@@ -14,7 +14,6 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 
 import org.bukkit.craftbukkit.libs.com.google.gson.reflect.TypeToken;
-import com.massivecraft.factions.integration.LWCFeatures;
 import com.massivecraft.factions.iface.RelationParticipator;
 import com.massivecraft.factions.struct.TerritoryAccess;
 import com.massivecraft.factions.util.AsciiCompass;
@@ -73,9 +72,6 @@ public class Board
 	
 	public static void removeAt(FLocation flocation)
 	{
-		if(Conf.onUnclaimResetLwcLocks && LWCFeatures.getEnabled())
-			LWCFeatures.clearAllChests(flocation);
-
 		flocationIds.remove(flocation);
 	}
 	
@@ -87,9 +83,6 @@ public class Board
 			Entry<FLocation, TerritoryAccess> entry = iter.next();
 			if (entry.getValue().getHostFactionID().equals(factionId))
 			{
-					if(Conf.onUnclaimResetLwcLocks && LWCFeatures.getEnabled())
-						LWCFeatures.clearAllChests(entry.getKey());
-
 					iter.remove();
 			}
 		}
@@ -129,10 +122,7 @@ public class Board
 			Entry<FLocation, TerritoryAccess> entry = iter.next();
 			if ( ! Factions.i.exists(entry.getValue().getHostFactionID()))
 			{
-				if(Conf.onUnclaimResetLwcLocks && LWCFeatures.getEnabled())
-					LWCFeatures.clearAllChests(entry.getKey());
-
-				P.p.log("Board cleaner removed "+entry.getValue().getHostFactionID()+" from "+entry.getKey());
+			P.p.log("Board cleaner removed "+entry.getValue().getHostFactionID()+" from "+entry.getKey());
 				iter.remove();
 			}
 		}
