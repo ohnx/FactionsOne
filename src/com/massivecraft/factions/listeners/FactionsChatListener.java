@@ -106,7 +106,7 @@ public class FactionsChatListener implements Listener
 		event.setCancelled(true);
 		
 		// 2. We trigger EventPriority.MONITOR manually without relation color.
-		AsyncPlayerChatEvent monitorOnlyEvent = new AsyncPlayerChatEvent(false, from, message, new HashSet<Player>(Arrays.asList(Bukkit.getOnlinePlayers())));
+		AsyncPlayerChatEvent monitorOnlyEvent = new AsyncPlayerChatEvent(false, from, message, new HashSet<Player>());
 		monitorOnlyEvent.setFormat(formatWithoutColor);
 		callEventAtMonitorOnly(monitorOnlyEvent);
 		
