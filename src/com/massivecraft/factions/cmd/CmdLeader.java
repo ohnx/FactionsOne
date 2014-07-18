@@ -33,7 +33,9 @@ public class CmdLeader extends FCommand
 	public void perform()
 	{
 		FPlayer newLeader = this.argAsBestFPlayerMatch(0);
-		if (newLeader == null) return;
+		if (newLeader == null){
+			return;
+		}
 		
 		Faction targetFaction = this.argAsFaction(1, myFaction);
 		if (targetFaction == null) return;

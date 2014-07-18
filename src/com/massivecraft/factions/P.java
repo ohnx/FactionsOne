@@ -18,10 +18,8 @@ import com.massivecraft.factions.adapters.FPermTypeAdapter;
 import com.massivecraft.factions.adapters.LocationTypeAdapter;
 import com.massivecraft.factions.adapters.RelTypeAdapter;
 import com.massivecraft.factions.cmd.*;
-import com.massivecraft.factions.integration.capi.CapiFeatures;
-import com.massivecraft.factions.integration.herochat.HerochatFeatures;
 import com.massivecraft.factions.integration.Econ;
-import com.massivecraft.factions.integration.EssentialsFeatures;
+import com.massivecraft.factions.integration.Essentials;
 import com.massivecraft.factions.integration.LWCFeatures;
 import com.massivecraft.factions.integration.Worldguard;
 import com.massivecraft.factions.listeners.FactionsBlockListener;
@@ -107,10 +105,8 @@ public class P extends MPlugin
 		this.cmdAutoHelp = new CmdAutoHelp();
 		this.cmdBase = new FCmdRoot();
 
-		EssentialsFeatures.setup();
+		Essentials.setup();
 		Econ.setup();
-		CapiFeatures.setup();
-		HerochatFeatures.setup();
 		LWCFeatures.setup();
 		
 		if(Conf.worldGuardChecking)
@@ -159,7 +155,6 @@ public class P extends MPlugin
 			Board.save();
 			Conf.save();
 		}
-		EssentialsFeatures.unhookChat();
 		if (AutoLeaveTask != null)
 		{
 			this.getServer().getScheduler().cancelTask(AutoLeaveTask);
