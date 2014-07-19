@@ -1,4 +1,4 @@
-Factions - 1.8 - UUID update
+Factions - 1.8.2 - UUID update
 ====================
 Note from externo6:
 
