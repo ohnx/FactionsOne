@@ -2,9 +2,12 @@ package com.massivecraft.factions.integration;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
 import com.massivecraft.factions.Conf;
@@ -110,13 +113,13 @@ public class Econ
 		i.msg("<h>%s<i> lacks permission to control <h>%s's<i> money.", i.describeTo(i, true), you.describeTo(i));
 		return false;
 	}
-	
+
 	public static boolean transferMoney(EconomyParticipator invoker, EconomyParticipator from, EconomyParticipator to, double amount)
 	{
 		return transferMoney(invoker, from, to, amount, true);
 	}
 	public static boolean transferMoney(EconomyParticipator invoker, EconomyParticipator from, EconomyParticipator to, double amount, boolean notify)
-	{
+	{	
 		if ( ! shouldBeUsed()) return false;
 
 		// The amount must be positive.
@@ -133,7 +136,7 @@ public class Econ
 		if ( ! canIControllYou(invoker, from)) return false;
 		
 		// Is there enough money for the transaction to happen?
-		if ( ! econ.has(from.getAccountId(), amount))
+		if (!econ.has(from.getAccountId(), amount))
 		{
 			// There was not enough money to pay
 			if (invoker != null && notify)
@@ -163,7 +166,7 @@ public class Econ
 		
 		return false;
 	}
-	
+
 	public static Set<FPlayer> getFplayers(EconomyParticipator ep)
 	{
 		Set<FPlayer> fplayers = new HashSet<FPlayer>();

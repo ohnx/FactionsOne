@@ -9,7 +9,7 @@ public abstract class Entity
 	
 	protected transient String id = null;
 	
-	public String getId()
+	public  String getId()
 	{
 		return id;
 	}
