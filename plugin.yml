@@ -1,8 +1,8 @@
 name: Factions
-version: 1.8.2-U0.1
+version: 1.8.2-U0.2
 main: com.massivecraft.factions.P
-authors: [Olof Cayorion Larsson, Brett Flannigan, drtshock, externo6]
-softdepend: [PermissionsEx, Permissions, Essentials, EssentialsChat, HeroChat, iChat, LocalAreaChat, LWC, nChat, ChatManager, CAPI, AuthMe, Vault, Spout, WorldEdit, WorldGuard, AuthDB, CaptureThePoints, CombatTag]
+authors: [drtshock, externo6, Olof Cayorion Larsson, Brett Flannigan]
+softdepend: [PermissionsEx, Essentials, EssentialsChat, Vault, Spout, WorldEdit, WorldGuard, CombatTag]
 commands:
   factions:
     description: The Factions base command
