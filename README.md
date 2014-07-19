@@ -4,8 +4,7 @@ Note from externo6:
 
 Using this version comes with no support from me, if you do use this fork make sure you backup all data. 
 I am not responsible for any loss of data.
-This fork was built upon adapting the changes from the 1.6 fork of Factions UUID update.
-https://github.com/drtshock/Factions
+This fork was built upon adapting the changes from the 1.6 fork of Factions UUID update. https://github.com/drtshock/Factions
 Most functionality works, economy is not working at the moment, everything else may work as expected.
 
 ====================
