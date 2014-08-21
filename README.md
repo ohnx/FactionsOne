@@ -5,7 +5,7 @@ Note from externo6:
 Using this version comes with no support from me, if you do use this fork make sure you backup all data. <br>
 I am not responsible for any loss of data.<br>
 This fork was built upon adapting the changes from the 1.6 fork of Factions UUID update. https://github.com/drtshock/Factions<br>
-Most functionality works, economy is not working at the moment, everything else may work as expected.
+Most functionality works.
 
 ====================
 This plugin will allow the players on the server to create factions/guilds. The factions can claim territory that will be protected from non-members. Factions can forge alliances and declare themselves enemies with others. Land may be taken from other factions through war.
