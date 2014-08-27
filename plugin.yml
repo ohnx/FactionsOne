@@ -1,5 +1,5 @@
 name: Factions
-version: 1.8.2-U0.3
+version: 1.8.2-U0.4
 main: com.massivecraft.factions.P
 authors: [drtshock, externo6, Olof Cayorion Larsson, Brett Flannigan]
 softdepend: [PermissionsEx, Essentials, EssentialsChat, Vault, Spout, WorldEdit, WorldGuard, CombatTag]
