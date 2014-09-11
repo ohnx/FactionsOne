@@ -122,19 +122,19 @@ public class FactionsPlayerListener implements Listener
 		boolean changedFaction = (Board.getFactionAt(from) != access.getHostFaction());
 
 		// let Spout handle most of this if it's available
-		boolean handledBySpout = changedFaction;
+	//	boolean handledBySpout = changedFaction;
 		
 		if (me.isMapAutoUpdating())
 		{
 			me.sendMessage(Board.getMap(me.getFaction(), to, player.getLocation().getYaw()));
 		}
-		else if (changedFaction && ! handledBySpout)
+		else if (changedFaction)
 		{
 			me.sendFactionHereMessage();
 		}
 
 		// show access info message if needed
-		if ( ! handledBySpout && ! access.isDefault())
+		if (! access.isDefault())
 		{
 			if (access.subjectHasAccess(me))
 				me.msg("<g>You have access to this area.");

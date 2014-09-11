@@ -62,7 +62,9 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 	
 	// FIELD: title
 	private String title;
-	public String getTitle() { return this.title; }
+	public String getTitle() { 
+		return this.hasFaction() ? title : "";
+		}
 	public void setTitle(String title) { this.title = title; }
 	
 	// FIELD: power
@@ -191,13 +193,8 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		         return player.getName() != null ? player.getName() : getId();
 	}
 	
-	public String getTag()
-	{
-		if ( ! this.hasFaction())
-		{
-			return "";
-		}
-		return this.getFaction().getTag();
+	public String getTag() {
+	return this.hasFaction() ? this.getFaction().getTag() : "";
 	}
 	
 	// Base concatenations:
@@ -239,31 +236,18 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 	
 	public String getChatTag()
 	{
-		if ( ! this.hasFaction()) {
-			return "";
-		}
-		
-		return String.format(Conf.chatTagFormat, this.role.getPrefix()+this.getTag());
+		return this.hasFaction() ? String.format(Conf.chatTagFormat, this.role.getPrefix() + this.getTag()) : "";
 	}
 	
 	// Colored Chat Tag
 	public String getChatTag(Faction faction)
 	{
-		if ( ! this.hasFaction()) {
-			return "";
-		}
-		
-		return this.getRelationTo(faction).getColor()+getChatTag();
+		return this.hasFaction() ? this.getRelationTo(faction).getColor() + getChatTag() : "";
 	}
 	
 	public String getChatTag(FPlayer fplayer)
 	{
-		if ( ! this.hasFaction())
-		{
-			return "";
-		}
-		
-		return this.getColorTo(fplayer)+getChatTag();
+		return this.hasFaction() ? this.getColorTo(fplayer) + getChatTag() : "";
 	}
 	
 	// -------------------------------
@@ -433,21 +417,34 @@ public class FPlayer extends PlayerEntity implements EconomyParticipator
 		return Board.getFactionAt(new FLocation(this)).getRelationTo(this) == Rel.NEUTRAL;
 	}*/
 
+
+    public boolean isInOthersTerritory() {
+        Faction factionHere = Board.getFactionAt(new FLocation(this));
+        return factionHere != null && factionHere.isNormal() && factionHere != this.getFaction();
+    }
+
+    public boolean isInAllyTerritory() {
+        return Board.getFactionAt(new FLocation(this)).getRelationTo(this) == Rel.ALLY;
+    }
+
+    public boolean isInNeutralTerritory() {
+        return Board.getFactionAt(new FLocation(this)).getRelationTo(this) == Rel.NEUTRAL;
+    }
+
 	public boolean isInEnemyTerritory()
 	{
 		return Board.getFactionAt(new FLocation(this)).getRelationTo(this) == Rel.ENEMY;
 	}
 
-	public void sendFactionHereMessage()
-	{
-		Faction factionHere = Board.getFactionAt(this.getLastStoodAt());
-		String msg = P.p.txt.parse("<i>")+" ~ "+factionHere.getTag(this);
-		if (factionHere.getDescription().length() > 0)
-		{
-			msg += " - "+factionHere.getDescription();
-		}
-		this.sendMessage(msg);
-	}
+    public void sendFactionHereMessage() {
+        Faction factionHere = Board.getFactionAt(this.getLastStoodAt());
+            String msg = P.p.txt.parse("<i>") + " ~ " + factionHere.getTag(this);
+            if (factionHere.getDescription().length() > 0) {
+                msg += " - " + factionHere.getDescription();
+            }
+            this.sendMessage(msg);
+        }
+
 	
 	// -------------------------------
 	// Actions
