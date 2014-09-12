@@ -299,7 +299,6 @@ public abstract class EntityCollection<E extends Entity>
                 }
                 saveCore(this.file, (Map<String, E>) data);
                 Bukkit.getLogger().log(Level.INFO, "Done converting to UUID.");
-                Bukkit.getLogger().log(Level.INFO, "Run /f save for the data to be saved to the disk");
             }
             return (Map<String, E>) data;
         }
