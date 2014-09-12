@@ -297,8 +297,9 @@ public abstract class EntityCollection<E extends Entity>
                     Bukkit.getLogger().log(Level.INFO, "While converting we found names that either don't have a UUID or aren't players and removed them from storage.");
                     Bukkit.getLogger().log(Level.INFO, "The following names were detected as being invalid: " + StringUtils.join(invalidNames, ", "));
                 }
-                saveToDisc(); // Update the flatfile
+                saveCore(this.file, (Map<String, E>) data);
                 Bukkit.getLogger().log(Level.INFO, "Done converting to UUID.");
+                Bukkit.getLogger().log(Level.INFO, "Run /f save for the data to be saved to the disk");
             }
             return (Map<String, E>) data;
         }
@@ -312,8 +313,8 @@ public abstract class EntityCollection<E extends Entity>
             if (backup.exists()) backup.delete();
             Bukkit.getLogger().log(Level.WARNING, "Backing up copy of bad file to: " + backup);
             file.renameTo(backup);
-
             return null;
+
         }
     }
 
