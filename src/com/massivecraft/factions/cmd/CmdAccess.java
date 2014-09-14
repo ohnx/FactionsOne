@@ -1,5 +1,10 @@
 package com.massivecraft.factions.cmd;
 
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+
 import com.massivecraft.factions.Board;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.FLocation;
@@ -94,9 +99,9 @@ public class CmdAccess extends FCommand
 	private void showAccessList(TerritoryAccess territory, Faction locFaction)
 	{
 		msg("<i>Host faction %s has %s<i> in this territory.", locFaction.getTag(), TextUtil.parseColor(territory.isHostFactionAllowed() ? "<lime>normal access" : "<rose>restricted access"));
-
 		String players = territory.fplayerList();
 		String factions = territory.factionList();
+
 
 		if (factions.isEmpty())
 			msg("No factions have been explicitly granted access.");
@@ -106,6 +111,10 @@ public class CmdAccess extends FCommand
 		if (players.isEmpty())
 			msg("No players have been explicitly granted access.");
 		else
-			msg("Players with explicit access: " + players);
+		{
+			OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(territory.fplayerList()));
+			String playersuuid = offlinePlayer != null ? offlinePlayer.getName() : "null player";
+			msg("Players with explicit access: " + playersuuid);
 	}
+}
 }
