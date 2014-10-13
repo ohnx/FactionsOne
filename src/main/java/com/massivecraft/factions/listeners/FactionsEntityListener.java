@@ -208,7 +208,14 @@ public class FactionsEntityListener implements Listener
 		         if (!(thrower instanceof Entity)) {
 		             return;
 		         }
-
+		         if(thrower instanceof Player){
+		        	 Player player = (Player) thrower;
+		        	 FPlayer fPlayer = FPlayers.i.get(player);
+		        	 if(badjuju && fPlayer.getFaction().isPeaceful()){
+		        	       event.setCancelled(true);
+		        	       return;
+		        	 }
+		   }
 		// scan through affected entities to make sure they're all valid targets
 		Iterator<LivingEntity> iter = event.getAffectedEntities().iterator();
 		while (iter.hasNext())
