@@ -1,10 +1,6 @@
 package com.massivecraft.factions.cmd;
 
-import com.massivecraft.factions.Board;
 import com.massivecraft.factions.Conf;
-import com.massivecraft.factions.FPlayers;
-import com.massivecraft.factions.Factions;
-import com.massivecraft.factions.P;
 import com.massivecraft.factions.struct.Permission;
 
 public class CmdReload extends FCommand
@@ -31,7 +27,7 @@ public class CmdReload extends FCommand
 	public void perform()
 	{
 		long timeInitStart = System.currentTimeMillis();
-		String file = this.argAsString(0, "all").toLowerCase();
+	/*	String file = this.argAsString(0, "all").toLowerCase();
 		
 		String fileName;
 		
@@ -68,11 +64,13 @@ public class CmdReload extends FCommand
 			P.p.log("RELOAD CANCELLED - SPECIFIED FILE INVALID");
 			msg("<b>Invalid file specified. <i>Valid files: all, conf, board, factions, players");
 			return;
-		}
+		} */
+		Conf.load();
 		
 		long timeReload = (System.currentTimeMillis()-timeInitStart);
 		
-		msg("<i>Reloaded <h>%s <i>from disk, took <h>%dms<i>.", fileName, timeReload);
+	//	msg("<i>Reloaded <h>%s <i>from disk, took <h>%dms<i>.", fileName, timeReload);
+		msg("<i>Reloaded <h>conf.json <i>from disk, took <h>%dms<i>.", timeReload);
 	}
 	
 }
