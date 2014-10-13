@@ -1,12 +1,11 @@
 Factions - 1.8.2 - UUID update
 ====================
 Note from externo6:<br>
-Credit to [RenegadeEagle](https://github.com/RenegadeEagle) and [drkshock](https://github.com/drtshock) for there code in this. 
-Using this version comes with no support from me, if you do use this fork make sure you backup all data. <br>
+Credit to [RenegadeEagle](https://github.com/RenegadeEagle) and [drkshock](https://github.com/drtshock) for there code in this.<br> 
+If you do use this fork make sure you backup all data. <br>
 I am not responsible for any loss of data.<br>
-This fork was built upon adapting the changes from the 1.6 fork of Factions UUID update. https://github.com/drtshock/Factions<br>
-Most functionality works.
-
+<br>
+This fork was built upon adapting the changes [drkshock's](https://github.com/drtshock) 1.6 [Factions UUID update](https://github.com/drtshock/Factions). <br>
 https://github.com/externo6/Factions/releases
 
 ====================
