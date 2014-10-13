@@ -1,5 +1,6 @@
 package com.massivecraft.factions.listeners;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -229,29 +230,27 @@ public class FactionsEntityListener implements Listener
 	{
 		Entity damager = sub.getDamager();
 		Entity damagee = sub.getEntity();
-		double damage = sub.getDamage();
+		         double damage = sub.getDamage();
 
-		if (!(damagee instanceof Player)){
-			return true;
-		}
+		if ( ! (damagee instanceof Player)) return true;
+
 		FPlayer defender = FPlayers.i.get((Player)damagee);
 
-		if (defender == null || defender.getPlayer() == null){
+		if (defender == null || defender.getPlayer() == null)
 			return true;
-		}
-		
+
 		Location defenderLoc = defender.getPlayer().getLocation();
 
 		Faction defLocFaction = Board.getFactionAt(new FLocation(defenderLoc));
 
 		// for damage caused by projectiles, getDamager() returns the projectile... what we need to know is the source
-		if (damager instanceof Entity) {
+		if (damager instanceof Projectile) {
 			damager = (Entity) ((Projectile) damager).getShooter();
 			         }
+
 		if (damager == damagee)  // ender pearl usage and other self-inflicted damage
-		{
 			return true;
-		}
+
 		// Players can not take attack damage in a SafeZone, or possibly peaceful territory
 
 		if (defLocFaction.getFlag(FFlag.PVP) == false)
