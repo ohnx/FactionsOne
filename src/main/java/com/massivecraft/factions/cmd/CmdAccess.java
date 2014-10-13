@@ -111,10 +111,7 @@ public class CmdAccess extends FCommand
 		if (players.isEmpty())
 			msg("No players have been explicitly granted access.");
 		else
-		{
-			OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(territory.fplayerList()));
-			String playersuuid = offlinePlayer != null ? offlinePlayer.getName() : "null player";
-			msg("Players with explicit access: " + playersuuid);
+		
+			msg("Players with explicit access: " + players);
 	}
-}
-}
+}	
