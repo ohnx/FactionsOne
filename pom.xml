@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.massivecraft</groupId>
   <artifactId>Factions</artifactId>
-  <version>1.8.2-U0.6</version>
+  <version>1.8.2-U0.7</version>
   <name>Factions</name>
 	<build>
 	  <finalName>Factions</finalName>
