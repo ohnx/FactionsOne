@@ -6,6 +6,7 @@
 # NetBeans
 /nbproject
 /build.xml
+/nb-configuration.xml
 
 # vim
 .*.sw[a-p]

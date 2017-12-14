@@ -23,7 +23,7 @@ import com.massivecraft.factions.zcore.util.DiscUtil;
 public class Board
 {
 	private static transient File file = new File(P.p.getDataFolder(), "board.json");
-	private static transient HashMap<FLocation, TerritoryAccess> flocationIds = new HashMap<FLocation, TerritoryAccess>();
+	public static transient HashMap<FLocation, TerritoryAccess> flocationIds = new HashMap<FLocation, TerritoryAccess>();
 	
 	//----------------------------------------------//
 	// Get and Set
