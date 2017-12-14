@@ -17,10 +17,7 @@ public class MiscUtil
 			return null;
 		}
 		
-		String name = entity.getClass().getSimpleName();
-		name = name.substring(5); // Remove "Craft"
-		
-		return EntityType.fromName(name);
+		return entity.getType();
 	}
 	
 	// Inclusive range
