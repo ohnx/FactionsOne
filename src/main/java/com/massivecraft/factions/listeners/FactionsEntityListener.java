@@ -286,7 +286,9 @@ public class FactionsEntityListener implements Listener
 		if (attacker == null || attacker.getPlayer() == null)
 			return true;
 
-		if (Conf.playersWhoBypassAllProtection.contains(attacker.getName())) return true;
+		String name = damager.getName();
+		String uuid = damager.getUniqueId().toString();
+		if (Conf.playersWhoBypassAllProtection.contains(name) || Conf.playersWhoBypassAllProtection.contains(uuid)) return true;
 
 		if (attacker.hasLoginPvpDisabled())
 		{

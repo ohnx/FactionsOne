@@ -20,12 +20,15 @@ package de.erethon.factionsone;
 
 import com.massivecraft.factions.Board;
 import com.massivecraft.factions.FLocation;
+import com.massivecraft.factions.FPlayer;
+import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.struct.TerritoryAccess;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * API additions that are specific to FactionsOne.
@@ -54,6 +57,15 @@ public class FactionsOneAPI {
      */
     public static void unclaimAll(Faction faction) {
         Board.unclaimAll(faction.getId());
+    }
+
+    /**
+     * @param uuid
+     * A player's UUID
+     * @return The FPlayer that has this UUID
+     */
+    public static FPlayer getFPlayer(UUID uuid) {
+        return FPlayers.i.get(uuid.toString());
     }
 
 }

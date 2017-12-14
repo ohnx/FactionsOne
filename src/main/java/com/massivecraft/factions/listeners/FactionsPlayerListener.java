@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -36,6 +37,7 @@ import com.massivecraft.factions.struct.FPerm;
 import com.massivecraft.factions.struct.Rel;
 import com.massivecraft.factions.struct.TerritoryAccess;
 import com.massivecraft.factions.util.VisualizeUtil;
+import de.erethon.factionsone.FactionsOneAPI;
 
 
 public class FactionsPlayerListener implements Listener
@@ -166,17 +168,17 @@ public class FactionsPlayerListener implements Listener
 			event.setCancelled(true);
 			if (Conf.handleExploitInteractionSpam)
 			{
-				String name = player.getName();
-				InteractAttemptSpam attempt = interactSpammers.get(name);
+				UUID uuid = player.getUniqueId();
+				InteractAttemptSpam attempt = interactSpammers.get(uuid);
 				if (attempt == null)
 				{
 					attempt = new InteractAttemptSpam();
-					interactSpammers.put(name, attempt);
+					interactSpammers.put(uuid, attempt);
 				}
 				int count = attempt.increment();
 				if (count >= 10)
 				{
-					FPlayer me = FPlayers.i.get(name);
+					FPlayer me = FactionsOneAPI.getFPlayer(uuid);
 					me.msg("<b>Ouch, that is starting to hurt. You should give it a rest.");
 					player.damage(NumberConversions.floor((double)count / 10));
 				}
@@ -195,7 +197,7 @@ public class FactionsPlayerListener implements Listener
 
 
 	// for handling people who repeatedly spam attempts to open a door (or similar) in another faction's territory
-	private Map<String, InteractAttemptSpam> interactSpammers = new HashMap<String, InteractAttemptSpam>();
+	private Map<UUID, InteractAttemptSpam> interactSpammers = new HashMap<UUID, InteractAttemptSpam>();
 	private static class InteractAttemptSpam
 	{
 		private int attempts = 0;
@@ -220,7 +222,8 @@ public class FactionsPlayerListener implements Listener
 	public static boolean playerCanUseItemHere(Player player, Location loc, Material material, boolean justCheck)
 	{
 		String name = player.getName();
-		if (Conf.playersWhoBypassAllProtection.contains(name)) return true;
+		String uuid = player.getUniqueId().toString();
+		if (Conf.playersWhoBypassAllProtection.contains(name) || Conf.playersWhoBypassAllProtection.contains(uuid)) return true;
 
 		FPlayer me = FPlayers.i.get(player);
 		if (me.hasAdminMode()) return true;
@@ -229,7 +232,9 @@ public class FactionsPlayerListener implements Listener
 	}
 	public static boolean canPlayerUseBlock(Player player, Block block, boolean justCheck)
 	{
-		if (Conf.playersWhoBypassAllProtection.contains(player.getName())) return true;
+		String name = player.getName();
+		String uuid = player.getUniqueId().toString();
+		if (Conf.playersWhoBypassAllProtection.contains(name) || Conf.playersWhoBypassAllProtection.contains(uuid)) return true;
 
 		FPlayer me = FPlayers.i.get(player);
 		if (me.hasAdminMode()) return true;

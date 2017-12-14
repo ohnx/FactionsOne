@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -17,18 +19,25 @@ import org.bukkit.entity.Player;
 
 public class VisualizeUtil
 {
-	protected static Map<String, Set<Location>> playerLocations = new HashMap<String, Set<Location>>();
+	protected static Map<UUID, Set<Location>> playerLocations = new HashMap<UUID, Set<Location>>();
 	public static Set<Location> getPlayerLocations(Player player)
 	{
-		return getPlayerLocations(player.getName());
+		return getPlayerLocations(player.getUniqueId());
 	}
+	
+	@Deprecated
 	public static Set<Location> getPlayerLocations(String playerName)
 	{
-		Set<Location> ret = playerLocations.get(playerName);
+		return getPlayerLocations(Bukkit.getOfflinePlayer(playerName).getUniqueId());
+	}
+	
+	public static Set<Location> getPlayerLocations(UUID playerId)
+	{
+		Set<Location> ret = playerLocations.get(playerId);
 		if (ret == null)
 		{
 			ret = new HashSet<Location>();
-			playerLocations.put(playerName, ret);
+			playerLocations.put(playerId, ret);
 		}
 		return ret;
 	}

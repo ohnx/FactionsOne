@@ -27,7 +27,7 @@ public class MPluginSecretPlayerListener implements Listener
 		{
 			if (ecoll instanceof PlayerEntityCollection)
 			{
-				ecoll.get(event.getPlayer().getName());
+				ecoll.get(event.getPlayer().getUniqueId().toString());
 			}
 		}
 	}
