@@ -47,8 +47,8 @@
                             </artifactSet>
                             <relocations>
                                 <relocation>
-                                    <pattern>com.google.code.gson</pattern>
-                                    <shadedPattern>de.erethon.util.gson</shadedPattern>
+                                    <pattern>com.google.gson</pattern>
+                                    <shadedPattern>de.erethon.factionsone.util.gson</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
