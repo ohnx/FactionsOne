@@ -38,7 +38,7 @@ import com.massivecraft.factions.zcore.MPlugin;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.libs.com.google.gson.GsonBuilder;
+import com.google.gson.GsonBuilder;
 
 
 public class P extends MPlugin
@@ -82,7 +82,7 @@ public class P extends MPlugin
 		// bit of (apparently absolutely necessary) idiot-proofing for CB version support due to changed GSON lib package name
 		try
 		{
-			Class.forName("org.bukkit.craftbukkit.libs.com.google.gson.reflect.TypeToken");
+			Class.forName("com.google.gson.reflect.TypeToken");
 		}
 		catch (ClassNotFoundException ex)
 		{
