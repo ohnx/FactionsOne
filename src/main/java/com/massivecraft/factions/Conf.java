@@ -8,6 +8,7 @@ import org.bukkit.entity.EntityType;
 import com.massivecraft.factions.struct.FFlag;
 import com.massivecraft.factions.struct.FPerm;
 import com.massivecraft.factions.struct.Rel;
+import de.erethon.factionsone.LegacyUtil;
 
 public class Conf
 {
@@ -251,27 +252,30 @@ public class Conf
 		materialsContainer.add(Material.DISPENSER);
 		materialsContainer.add(Material.CHEST);
 		materialsContainer.add(Material.FURNACE);
-		materialsContainer.add(Material.BURNING_FURNACE);
+                if (!LegacyUtil.is1_13)
+                        materialsContainer.add(Material.valueOf("BURNING_FURNACE"));
 		materialsContainer.add(Material.JUKEBOX);
 		materialsContainer.add(Material.BREWING_STAND);
-		materialsContainer.add(Material.ENCHANTMENT_TABLE);
+		materialsContainer.add(LegacyUtil.ENCHANTING_TABLE);
 		materialsContainer.add(Material.ANVIL);
 		materialsContainer.add(Material.BEACON);
 		materialsContainer.add(Material.TRAPPED_CHEST);
 		materialsContainer.add(Material.DROPPER);
 		materialsContainer.add(Material.HOPPER);
 		
-		materialsEditOnInteract.add(Material.DIODE_BLOCK_OFF);
-		materialsEditOnInteract.add(Material.DIODE_BLOCK_ON);
+                if (!LegacyUtil.is1_13)
+                {
+                        materialsEditOnInteract.add(Material.valueOf("DIODE_BLOCK_OFF"));
+                        materialsEditOnInteract.add(Material.valueOf("DIODE_BLOCK_ON"));
+                } else materialsEditOnInteract.add(Material.valueOf("REPEATER"));
 		materialsEditOnInteract.add(Material.NOTE_BLOCK);
 		materialsEditOnInteract.add(Material.CAULDRON);
-		materialsEditOnInteract.add(Material.SOIL);
+		materialsEditOnInteract.add(LegacyUtil.FARMLAND);
 
-		materialsDoor.add(Material.WOODEN_DOOR);
-		materialsDoor.add(Material.TRAP_DOOR);
-		materialsDoor.add(Material.FENCE_GATE);
+                for (Material type : LegacyUtil.DOORS) 
+                    materialsDoor.add(type);
 		
-		materialsEditTools.add(Material.FIREBALL);
+		materialsEditTools.add(LegacyUtil.FIRE_CHARGE);
 		materialsEditTools.add(Material.FLINT_AND_STEEL);
 		materialsEditTools.add(Material.BUCKET);
 		materialsEditTools.add(Material.WATER_BUCKET);

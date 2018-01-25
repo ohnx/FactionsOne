@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
@@ -50,6 +51,7 @@ import com.massivecraft.factions.event.PowerLossEvent;
 import com.massivecraft.factions.struct.FFlag;
 import com.massivecraft.factions.struct.Rel;
 import com.massivecraft.factions.util.MiscUtil;
+import de.erethon.factionsone.LegacyUtil;
 
 
 public class FactionsEntityListener implements Listener
@@ -161,9 +163,7 @@ public class FactionsEntityListener implements Listener
 			targets.add(center.getRelative(-1, 0, 0));
 			for (Block target : targets)
 			{
-				int id = target.getTypeId();
-				// ignore air, bedrock, water, lava, obsidian, enchanting table, etc.... too bad we can't get a blast resistance value through Bukkit yet
-				if (id != 0 && (id < 7 || id > 11) && id != 49 && id != 90 && id != 116 && id != 119 && id != 120 && id != 130)
+				if (LegacyUtil.MATERIALS_WITH_HIGH_BLAST_RESISTANCE.contains(target.getType()))
 					target.breakNaturally();
 			}
 		}
@@ -286,7 +286,7 @@ public class FactionsEntityListener implements Listener
 		if (attacker == null || attacker.getPlayer() == null)
 			return true;
 
-		String name = damager.getName();
+		String name = ((Player) damager).getName();
 		String uuid = damager.getUniqueId().toString();
 		if (Conf.playersWhoBypassAllProtection.contains(name) || Conf.playersWhoBypassAllProtection.contains(uuid)) return true;
 

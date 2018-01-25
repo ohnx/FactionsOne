@@ -59,9 +59,9 @@ public class CmdSeeChunk extends FCommand
 		for (int blockY = 0; blockY < world.getMaxHeight(); blockY++)
 		{
 			Location loc = new Location(world, blockX, blockY, blockZ);
-			if (loc.getBlock().getTypeId() != 0) continue;
-			int typeId = blockY % 5 == 0 ? Material.GLOWSTONE.getId() : Material.GLASS.getId();
-			VisualizeUtil.addLocation(player, loc, typeId);
+			if (loc.getBlock().getType() != Material.AIR) continue;
+			Material type = blockY % 5 == 0 ? Material.GLOWSTONE : Material.GLASS;
+			VisualizeUtil.addLocation(player, loc, type);
 		}
 	}
 	

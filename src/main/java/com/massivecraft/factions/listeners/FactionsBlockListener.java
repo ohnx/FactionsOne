@@ -1,6 +1,7 @@
 package com.massivecraft.factions.listeners;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -37,7 +38,7 @@ public class FactionsBlockListener implements Listener
 	public void onBlockSpread(BlockSpreadEvent event)
 	{
 		if (event.isCancelled()) return;
-		if (event.getSource().getTypeId() != 51) return; // Must be Fire
+		if (event.getSource().getType() != Material.FIRE) return; // Must be Fire
 		Faction faction = Board.getFactionAt(event.getBlock());
 		if (faction.getFlag(FFlag.FIRESPREAD) == false)
 		{
