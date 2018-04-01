@@ -79,18 +79,6 @@ public class P extends MPlugin
 	@Override
 	public void onEnable()
 	{
-		// bit of (apparently absolutely necessary) idiot-proofing for CB version support due to changed GSON lib package name
-		try
-		{
-			Class.forName("com.google.gson.reflect.TypeToken");
-		}
-		catch (ClassNotFoundException ex)
-		{
-			this.log(Level.SEVERE, "GSON lib not found. Your CraftBukkit build is too old (< 1.3.2) or otherwise not compatible.");
-			this.suicide();
-			return;
-		}
-
 		if ( ! preEnable()) return;
 		this.loadSuccessful = false;
 
