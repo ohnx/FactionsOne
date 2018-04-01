@@ -75,7 +75,7 @@ public class TextUtil
 	
 	public static String parseColorAmp(String string)
 	{
-		string = string.replaceAll("(§([a-z0-9]))", "\u00A7$2");
+		string = string.replaceAll("(\u00A7l([a-z0-9]))", "\u00A7$2");
 		string = string.replaceAll("(&([a-z0-9]))", "\u00A7$2");
 		string = string.replace("&&", "&");
 		return string;

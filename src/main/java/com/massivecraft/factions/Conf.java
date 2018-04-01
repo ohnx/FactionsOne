@@ -69,7 +69,7 @@ public class Conf
 	
 	// Configuration on the Faction tag in chat messages.
 	public static boolean chatSetFormat = false;
-	public static String chatSetFormatTo = "<{faction_relcolor}§l{faction_roleprefix}§r{faction_relcolor}{faction_tag_pr}"+ChatColor.WHITE.toString()+"%s> %s";
+	public static String chatSetFormatTo = "<{faction_relcolor}\u00A7l{faction_roleprefix}\u00A7lr{faction_relcolor}{faction_tag_pr}"+ChatColor.WHITE.toString()+"%s> %s";
 	public static boolean chatParseTags = true;
 	public static boolean chatParseTagsColored = false;
 	public static Map<String, String> chatSingleFormats = new HashMap<String, String>();
