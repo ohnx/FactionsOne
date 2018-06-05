@@ -34,13 +34,14 @@ public class LegacyUtil {
 
     public static boolean is1_7 = version.equals("1.7.9") || version.equals("1.7.10");
     public static boolean is1_8 = version.equals("1.8") || version.matches("1.8.*");
-    public static boolean is1_13 = !version.matches("1.[7-9]*") && !version.matches("1.1[0-2]*");
+    public static boolean is1_13 = !version.matches("(^|.*[^\\.\\d])1\\.1[0-2]([^\\d].*|$)") && !version.matches("(^|.*[^\\.\\d])1\\.[0-9]([^\\d].*|$)");
 
+    public static final Material COMMAND_BLOCK = Material.valueOf(is1_13 ? "COMMAND_BLOCK" : "COMMAND");
     public static final Material FLOWING_LAVA = Material.valueOf(is1_13 ? "FLOWING_LAVA" : "LAVA");
     public static final Material LAVA = Material.valueOf(is1_13 ? "LAVA" : "STATIONARY_LAVA");
     public static final Material FLOWING_WATER = Material.valueOf(is1_13 ? "FLOWING_WATER" : "WATER");
     public static final Material WATER = Material.valueOf(is1_13 ? "WATER" : "STATIONARY_WATER");
-    public static final Material ENCHANTING_TABLE = Material.valueOf(is1_13 ? "ENCHANTMENT_TABLE" : "ENCHANTING_TABLE");
+    public static final Material ENCHANTING_TABLE = Material.valueOf(is1_13 ? "ENCHANTING_TABLE" : "ENCHANTMENT_TABLE");
     public static final Material OAK_TRAPDOOR = Material.valueOf(is1_13 ? "OAK_TRAPDOOR" : "TRAP_DOOR");
     public static final Material OAK_FENCE_GATE = Material.valueOf(is1_13 ? "OAK_FENCE_GATE" : "FENCE_GATE");
     public static final Material FIRE_CHARGE = Material.valueOf(is1_13 ? "FIRE_CHARGE" : "FIREBALL");
@@ -73,7 +74,7 @@ public class LegacyUtil {
             DOORS.add(Material.JUNGLE_FENCE_GATE);
             DOORS.add(Material.ACACIA_FENCE_GATE);
             DOORS.add(Material.DARK_OAK_FENCE_GATE);
-            MATERIALS_WITH_HIGH_BLAST_RESISTANCE.add(Material.COMMAND_BLOCK);
+            MATERIALS_WITH_HIGH_BLAST_RESISTANCE.add(COMMAND_BLOCK);
             MATERIALS_WITH_HIGH_BLAST_RESISTANCE.add(Material.STRUCTURE_BLOCK);
             MATERIALS_WITH_HIGH_BLAST_RESISTANCE.add(Material.BARRIER);
             if (!is1_8) {
