@@ -3,7 +3,7 @@ package com.massivecraft.factions.cmd;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.struct.FFlag;
 import com.massivecraft.factions.struct.Permission;
-import com.massivecraft.factions.zcore.Lang;
+import de.erethon.factionsone.Language;
 
 public class CmdFlag extends FCommand
 {
@@ -39,7 +39,7 @@ public class CmdFlag extends FCommand
 		{
 			if (senderIsConsole)
 			{
-				msg(Lang.commandToFewArgs);
+				msg(Language.getInstance().commandToFewArgs);
 				sender.sendMessage(this.getUseageTemplate());
 			}
 			return;

@@ -1,6 +1,7 @@
 package com.massivecraft.factions.cmd;
 
 import com.massivecraft.factions.P;
+import de.erethon.factionsone.Language;
 
 public class CmdMoney extends FCommand
 {
@@ -26,8 +27,8 @@ public class CmdMoney extends FCommand
 		senderMustBeOfficer = false;
 		senderMustBeLeader = false;
 		
-		this.setHelpShort("faction money commands");
-		this.helpLong.add(p.txt.parseTags("<i>The faction money commands."));
+		this.setHelpShort(Language.getInstance().helpMoneyShort);
+		this.helpLong.add(p.txt.parseTags(Language.getInstance().helpMoneyLong));
 		
 		this.addSubCommand(this.cmdMoneyBalance);
 		this.addSubCommand(this.cmdMoneyDeposit);

@@ -8,6 +8,7 @@ import com.massivecraft.factions.Conf;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.Factions;
 import com.massivecraft.factions.struct.Permission;
+import de.erethon.factionsone.Language;
 
 
 public class CmdList extends FCommand
@@ -105,16 +106,16 @@ public class CmdList extends FCommand
 		if (end > factionList.size())
 			end = factionList.size();
 
-		lines.add(p.txt.titleize("Faction List "+pagenumber+"/"+pagecount));
+		lines.add(p.txt.titleize(Language.getInstance().factionList+" "+pagenumber+"/"+pagecount));
 
 		for (Faction faction : factionList.subList(start, end))
 		{
 			if (faction.isNone())
 			{
-				lines.add(p.txt.parse("<i>Factionless<i> %d online", Factions.i.getNone().getFPlayersWhereOnline(true).size()));
+				lines.add(p.txt.parse(Language.getInstance().factionFactionlessOnline, Factions.i.getNone().getFPlayersWhereOnline(true).size()));
 				continue;
 			}
-			lines.add(p.txt.parse("%s<i> %d/%d online, %d/%d/%d",
+			lines.add(p.txt.parse(Language.getInstance().factionOnline,
 				faction.getTag(fme),
 				faction.getFPlayersWhereOnline(true).size(),
 				faction.getFPlayers().size(),

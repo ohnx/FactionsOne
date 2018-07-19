@@ -3,17 +3,18 @@ package com.massivecraft.factions.struct;
 import org.bukkit.ChatColor;
 
 import com.massivecraft.factions.Conf;
+import de.erethon.factionsone.Language;
 
 public enum Rel
 {
-	LEADER   (70, "your faction leader", "your faction leader", "", ""),
-	OFFICER  (60, "an officer in your faction", "officers in your faction", "", ""),
-	MEMBER   (50, "a member in your faction", "members in your faction", "your faction", "your factions"),
-	RECRUIT  (45, "a recruit in your faction", "recruits in your faction", "", ""),
-	ALLY     (40, "an ally", "allies", "an allied faction", "allied factions"),
-	TRUCE    (30, "someone in truce with you", "those in truce with you", "a faction in truce", "factions in truce"),
-	NEUTRAL  (20, "someone neutral to you", "those neutral to you", "a neutral faction", "neutral factions"),
-	ENEMY    (10, "an enemy", "enemies", "an enemy faction", "enemy factions"),
+	LEADER   (70, Language.getInstance().relLeader, Language.getInstance().relLeader, "", ""),
+	OFFICER  (60, Language.getInstance().relOfficerPlayerSg, Language.getInstance().relOfficerPlayerPl, "", ""),
+	MEMBER   (50, Language.getInstance().relMemberPlayerSg, Language.getInstance().relMemberPlayerPl, Language.getInstance().relMemberFactionSg, Language.getInstance().relMemberFactionPl),
+	RECRUIT  (45, Language.getInstance().relRecruitPlayerSg, Language.getInstance().relRecruitPlayerPl, "", ""),
+	ALLY     (40, Language.getInstance().relAllyPlayerSg, Language.getInstance().relAllyPlayerPl,  Language.getInstance().relAllyFactionSg, Language.getInstance().relAllyFactionPl),
+	TRUCE    (30, Language.getInstance().relTrucePlayerSg, Language.getInstance().relTrucePlayerPl, Language.getInstance().relTruceFactionSg, Language.getInstance().relTruceFactionPl),
+	NEUTRAL  (20, Language.getInstance().relNeutralPlayerSg, Language.getInstance().relNeutralPlayerPl, Language.getInstance().relNeutralFactionSg, Language.getInstance().relNeutralFactionPl),
+	ENEMY    (10, Language.getInstance().relEnemyPlayerSg, Language.getInstance().relEnemyPlayerPl, Language.getInstance().relEnemyFactionSg, Language.getInstance().relEnemyFactionPl),
 	;
 	
 	private final int value;

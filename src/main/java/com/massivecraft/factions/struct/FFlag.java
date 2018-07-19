@@ -1,6 +1,7 @@
 package com.massivecraft.factions.struct;
 
 import com.massivecraft.factions.Conf;
+import de.erethon.factionsone.Language;
 
 /**
  * Flags that describe the nature of a faction and it's territory.
@@ -12,21 +13,21 @@ import com.massivecraft.factions.Conf;
 public enum FFlag
 {
 	// Faction flags
-	PERMANENT("permanent", "<i>A permanent faction will never be deleted.", false),
-	PEACEFUL("peaceful", "<i>Allways in truce with other factions.", false),
-	INFPOWER("infpower", "<i>This flag gives the faction infinite power.", false),
+	PERMANENT("permanent", Language.getInstance().flagPermanent, false),
+	PEACEFUL("peaceful", Language.getInstance().flagPeaceful, false),
+	INFPOWER("infpower", Language.getInstance().flagInfpower, false),
 	// This faction has infinite power: TODO: Add faction has enough method. Replace the permanentpower level 
 	
 	// (Faction) Territory flags
 	// If a faction later could have many different territories this would probably be in another enum
-	POWERLOSS("powerloss", "<i>Is power lost on death in this territory?", true),
-	PVP("pvp", "<i>Can you PVP in territory?", true),
-	FRIENDLYFIRE("friendlyfire", "<i>Can friends hurt eachother here?", false),
-	MONSTERS("monsters", "<i>Can monsters spawn in this territory?", true),
-	EXPLOSIONS("explosions", "<i>Can explosions occur in this territory?", true),
-	FIRESPREAD("firespread", "<i>Can fire spread in territory?", true),
+	POWERLOSS("powerloss", Language.getInstance().flagPowerloss, true),
+	PVP("pvp", Language.getInstance().flagPvp, true),
+	FRIENDLYFIRE("friendlyfire", Language.getInstance().flagFriendlyFire, false),
+	MONSTERS("monsters", Language.getInstance().flagMonsters, true),
+	EXPLOSIONS("explosions", Language.getInstance().flagExplosions, true),
+	FIRESPREAD("firespread", Language.getInstance().flagFirespread, true),
 	//LIGHTNING("lightning", "<i>Can lightning strike in this territory?", true), Possible to add later.
-	ENDERGRIEF("endergrief", "<i>Can endermen grief in this territory?", false),
+	ENDERGRIEF("endergrief", Language.getInstance().flagEndergrief, false),
 	;
 	
 	private final String nicename;

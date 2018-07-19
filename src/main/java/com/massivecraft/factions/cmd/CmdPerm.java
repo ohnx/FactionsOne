@@ -4,7 +4,7 @@ import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.struct.FPerm;
 import com.massivecraft.factions.struct.Permission;
 import com.massivecraft.factions.struct.Rel;
-import com.massivecraft.factions.zcore.Lang;
+import de.erethon.factionsone.Language;
 
 public class CmdPerm extends FCommand
 {
@@ -42,7 +42,7 @@ public class CmdPerm extends FCommand
 		{
 			if (senderIsConsole)
 			{
-				msg(Lang.commandToFewArgs);
+				msg(Language.getInstance().commandToFewArgs);
 				sender.sendMessage(this.getUseageTemplate());
 			}
 			return;

@@ -7,8 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
-import com.massivecraft.factions.zcore.Lang;
 import com.massivecraft.factions.zcore.MPlugin;
+import de.erethon.factionsone.Language;
 
 
 public class PermUtil {
@@ -25,7 +25,7 @@ public class PermUtil {
 	
 	public String getForbiddenMessage(String perm)
 	{
-		return p.txt.parse(Lang.permForbidden, getPermissionDescription(perm));
+		return p.txt.parse(Language.getInstance().permForbidden, getPermissionDescription(perm));
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class PermUtil {
 		String desc = permissionDescriptions.get(perm);
 		if (desc == null)
 		{
-			return Lang.permDoThat;
+			return Language.getInstance().permDoThat;
 		}
 		return desc;
 	}

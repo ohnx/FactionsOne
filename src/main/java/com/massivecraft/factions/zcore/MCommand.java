@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import com.massivecraft.factions.zcore.MCommand;
 import com.massivecraft.factions.zcore.MPlugin;
 import com.massivecraft.factions.zcore.util.TextUtil;
+import de.erethon.factionsone.Language;
 
 
 public abstract class MCommand<T extends MPlugin>
@@ -171,7 +172,7 @@ public abstract class MCommand<T extends MPlugin>
 		{
 			if (informSenderIfNot)
 			{
-				msg(Lang.commandSenderMustBePlayer);
+				msg(Language.getInstance().commandSenderMustBePlayer);
 			}
 			return false;
 		}
@@ -190,7 +191,7 @@ public abstract class MCommand<T extends MPlugin>
 		{
 			if (sender != null)
 			{
-				msg(Lang.commandToFewArgs);
+				msg(Language.getInstance().commandToFewArgs);
 				sender.sendMessage(this.getUseageTemplate());
 			}
 			return false;
@@ -202,7 +203,7 @@ public abstract class MCommand<T extends MPlugin>
 			{
 				// Get the to many string slice
 				List<String> theToMany = args.subList(this.requiredArgs.size() + this.optionalArgs.size(), args.size());
-				msg(Lang.commandToManyArgs, TextUtil.implode(theToMany, " "));
+				msg(Language.getInstance().commandToManyArgs, TextUtil.implode(theToMany, " "));
 				sender.sendMessage(this.getUseageTemplate());
 			}
 			return false;
@@ -413,7 +414,7 @@ public abstract class MCommand<T extends MPlugin>
 		
 		if (msg && ret == null)
 		{
-			this.msg("<b>No player \"<p>%s<b>\" could not be found.", name);			
+			this.msg(Language.getInstance().playerNoneFound, name);			
 		}
 		
 		return ret;
@@ -448,7 +449,7 @@ public abstract class MCommand<T extends MPlugin>
 		
 		if (msg && ret == null)
 		{
-			this.msg("<b>No player match found for \"<p>%s<b>\".", name);
+			this.msg(Language.getInstance().playerNoMatch, name);
 		}
 		
 		return ret;

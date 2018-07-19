@@ -9,6 +9,7 @@ import com.massivecraft.factions.iface.RelationParticipator;
 import com.massivecraft.factions.struct.FFlag;
 import com.massivecraft.factions.struct.Rel;
 import com.massivecraft.factions.zcore.util.TextUtil;
+import de.erethon.factionsone.Language;
 
 public class RelationUtil
 {
@@ -18,7 +19,7 @@ public class RelationUtil
 
 		if (that == null)
 		{
-			return "A server admin";
+			return Language.getInstance().relServerAdmin;
 		}
 		
 		Faction thatFaction = getFaction(that);
@@ -31,7 +32,7 @@ public class RelationUtil
 		{
 			if (me instanceof FPlayer && myFaction == thatFaction)
 			{
-				ret = "your faction";
+				ret = Language.getInstance().relYourFaction;
 			}
 			else
 			{
@@ -43,7 +44,7 @@ public class RelationUtil
 			FPlayer fplayerthat = (FPlayer) that;
 			if (that == me)
 			{
-				ret = "you";
+				ret = Language.getInstance().relYou;
 			}
 			else if (thatFaction == myFaction)
 			{

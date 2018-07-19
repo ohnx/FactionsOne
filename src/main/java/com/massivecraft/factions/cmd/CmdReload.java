@@ -2,6 +2,7 @@ package com.massivecraft.factions.cmd;
 
 import com.massivecraft.factions.Conf;
 import com.massivecraft.factions.struct.Permission;
+import de.erethon.factionsone.Language;
 
 public class CmdReload extends FCommand
 {
@@ -66,11 +67,12 @@ public class CmdReload extends FCommand
 			return;
 		} */
 		Conf.load();
+                Language.getInstance().reload();
 		
 		long timeReload = (System.currentTimeMillis()-timeInitStart);
 		
 	//	msg("<i>Reloaded <h>%s <i>from disk, took <h>%dms<i>.", fileName, timeReload);
-		msg("<i>Reloaded <h>config <i>from disk, took <h>%dms<i>.", timeReload);
+		msg(Language.getInstance().configReloaded, timeReload);
 	}
 	
 }

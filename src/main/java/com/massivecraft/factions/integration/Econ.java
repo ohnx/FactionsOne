@@ -18,6 +18,7 @@ import com.massivecraft.factions.P;
 import com.massivecraft.factions.iface.EconomyParticipator;
 import com.massivecraft.factions.struct.FPerm;
 import com.massivecraft.factions.util.RelationUtil;
+import de.erethon.factionsone.Language;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -84,7 +85,7 @@ public class Econ
 			P.p.log(Level.WARNING, "Vault does not appear to be hooked into an economy plugin.");
 			return;
 		}
-		to.msg("<a>%s's<i> balance is <h>%s<i>.", about.describeTo(to, true), Econ.moneyString(econ.getBalance(about.getAccountId())));
+		to.msg(Language.getInstance().moneyBalance, about.describeTo(to, true), Econ.moneyString(econ.getBalance(about.getAccountId())));
 	}
 
 	public static boolean canIControllYou(EconomyParticipator i, EconomyParticipator you)
@@ -110,7 +111,7 @@ public class Econ
 		if (you instanceof Faction && FPerm.WITHDRAW.has(i, fYou)) return true;
 		
 		// Otherwise you may not! ;,,;
-		i.msg("<h>%s<i> lacks permission to control <h>%s's<i> money.", i.describeTo(i, true), you.describeTo(i));
+		i.msg(Language.getInstance().permNoMoneyControl, i.describeTo(i, true), you.describeTo(i));
 		return false;
 	}
 
@@ -155,7 +156,7 @@ public class Econ
 			    if (!econ.has(fromAcc, amount)) {
 			// There was not enough money to pay
 			if (invoker != null && notify)
-				invoker.msg("<h>%s<b> can't afford to transfer <h>%s<b> to %s<b>.", from.describeTo(invoker, true), moneyString(amount), to.describeTo(invoker));
+				invoker.msg(Language.getInstance().moneyCannotAffordTransfer, from.describeTo(invoker, true), moneyString(amount), to.describeTo(invoker));
 
 			return false;
 		}
@@ -176,7 +177,7 @@ public class Econ
 		
 		// if we get here something with the transaction failed
 		if (notify)
-			invoker.msg("Unable to transfer %s<b> to <h>%s<b> from <h>%s<b>.", moneyString(amount), to.describeTo(invoker), from.describeTo(invoker, true));
+			invoker.msg(Language.getInstance().moneyTransactionFailed, moneyString(amount), to.describeTo(invoker), from.describeTo(invoker, true));
 			
 		
 		return false;
@@ -208,28 +209,28 @@ public class Econ
 		{
 			for (FPlayer recipient : recipients)
 			{
-				recipient.msg("<h>%s<i> was transfered from <h>%s<i> to <h>%s<i>.", moneyString(amount), from.describeTo(recipient), to.describeTo(recipient));
+				recipient.msg(Language.getInstance().moneyTransferredInfo, moneyString(amount), from.describeTo(recipient), to.describeTo(recipient));
 			}
 		}
 		else if (invoker == from)
 		{
 			for (FPlayer recipient : recipients)
 			{
-				recipient.msg("<h>%s<i> <h>gave %s<i> to <h>%s<i>.", from.describeTo(recipient, true), moneyString(amount), to.describeTo(recipient));
+				recipient.msg(Language.getInstance().moneyGave, from.describeTo(recipient, true), moneyString(amount), to.describeTo(recipient));
 			}
 		}
 		else if (invoker == to)
 		{
 			for (FPlayer recipient : recipients)
 			{
-				recipient.msg("<h>%s<i> <h>took %s<i> from <h>%s<i>.", to.describeTo(recipient, true), moneyString(amount), from.describeTo(recipient));
+				recipient.msg(Language.getInstance().moneyTook, to.describeTo(recipient, true), moneyString(amount), from.describeTo(recipient));
 			}
 		}
 		else
 		{
 			for (FPlayer recipient : recipients)
 			{
-				recipient.msg("<h>%s<i> transfered <h>%s<i> from <h>%s<i> to <h>%s<i>.", invoker.describeTo(recipient, true), moneyString(amount), from.describeTo(recipient), to.describeTo(recipient));
+				recipient.msg(Language.getInstance().moneyTransferredInfo, invoker.describeTo(recipient, true), moneyString(amount), from.describeTo(recipient), to.describeTo(recipient));
 			}
 		}
 	}
@@ -254,7 +255,7 @@ public class Econ
 		
 		        if (!affordable) {
 			if (toDoThis != null && !toDoThis.isEmpty())
-				ep.msg("<h>%s<i> can't afford <h>%s<i> %s.", ep.describeTo(ep, true), moneyString(delta), toDoThis);
+				ep.msg(Language.getInstance().moneyHasAtLeast, ep.describeTo(ep, true), moneyString(delta), toDoThis);
 			return false;
 		}
 		return true;
@@ -288,12 +289,12 @@ public class Econ
 			if (er.transactionSuccess()) {
 				modifyUniverseMoney(-delta);
 				if (forDoingThis != null && !forDoingThis.isEmpty())
-					ep.msg("<h>%s<i> gained <h>%s<i> %s.", You, moneyString(delta), forDoingThis);
+					ep.msg(Language.getInstance().moneyGained, You, moneyString(delta), forDoingThis);
 				return true;
 			} else {
 				// transfer to account failed
 				if (forDoingThis != null && !forDoingThis.isEmpty())
-					ep.msg("<h>%s<i> would have gained <h>%s<i> %s, but the deposit failed.", You, moneyString(delta), forDoingThis);
+					ep.msg(Language.getInstance().moneyGainFailed, You, moneyString(delta), forDoingThis);
 				return false;
 			}
 			
@@ -308,14 +309,14 @@ public class Econ
 				// There is enough money to pay
 				modifyUniverseMoney(-delta);
 				if (forDoingThis != null && !forDoingThis.isEmpty())
-					ep.msg("<h>%s<i> lost <h>%s<i> %s.", You, moneyString(-delta), forDoingThis);
+					ep.msg(Language.getInstance().moneyLost, You, moneyString(-delta), forDoingThis);
 				return true;
 			}
 			else
 			{
 				// There was not enough money to pay
 				if (toDoThis != null && !toDoThis.isEmpty())
-					ep.msg("<h>%s<i> can't afford <h>%s<i> %s.", You, moneyString(-delta), toDoThis);
+					ep.msg(Language.getInstance().moneyCannotAffordAmount, You, moneyString(-delta), toDoThis);
 				return false;
 			}
 		}

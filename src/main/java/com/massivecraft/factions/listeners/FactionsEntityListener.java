@@ -51,6 +51,7 @@ import com.massivecraft.factions.event.PowerLossEvent;
 import com.massivecraft.factions.struct.FFlag;
 import com.massivecraft.factions.struct.Rel;
 import com.massivecraft.factions.util.MiscUtil;
+import de.erethon.factionsone.Language;
 import de.erethon.factionsone.LegacyUtil;
 
 
@@ -77,16 +78,16 @@ public class FactionsEntityListener implements Listener
 		// Check for no power loss conditions
 		if ( ! faction.getFlag(FFlag.POWERLOSS))
 		{
-			powerLossEvent.setMessage("<i>You didn't lose any power since the territory you died in works that way.");
+			powerLossEvent.setMessage(Language.getInstance().playerNoPowerlossTerritory);
 			powerLossEvent.setCancelled(true);
 		}
 		else if (Conf.worldsNoPowerLoss.contains(player.getWorld().getName()))
 		{
-			powerLossEvent.setMessage("<i>You didn't lose any power due to the world you died in.");
+			powerLossEvent.setMessage(Language.getInstance().playerNoPowerlossWorld);
 			powerLossEvent.setCancelled(true);
 		}
 		else {
-			powerLossEvent.setMessage("<i>Your power is now <h>%d / %d");
+			powerLossEvent.setMessage(Language.getInstance().playerNewPower);
 		}
 
 		// call Event
@@ -271,7 +272,7 @@ public class FactionsEntityListener implements Listener
 				if (notify)
 				{
 					FPlayer attacker = FPlayers.i.get((Player)damager);
-					attacker.msg("<i>PVP is disabled in %s.", defLocFaction.describeTo(attacker));
+					attacker.msg(Language.getInstance().pvpDisabled, defLocFaction.describeTo(attacker));
 				}
 				return false;
 			}
@@ -292,7 +293,7 @@ public class FactionsEntityListener implements Listener
 
 		if (attacker.hasLoginPvpDisabled())
 		{
-			if (notify) attacker.msg("<i>You can't hurt other players for " + Conf.noPVPDamageToOthersForXSecondsAfterLogin + " seconds after logging in.");
+			if (notify) attacker.msg(Language.getInstance().pvpDisabledLogin1 + Conf.noPVPDamageToOthersForXSecondsAfterLogin + Language.getInstance().pvpDisabledLogin2);
 			return false;
 		}
 
@@ -301,7 +302,7 @@ public class FactionsEntityListener implements Listener
 		// so we know from above that the defender isn't in a safezone... what about the attacker, sneaky dog that he might be?
 		if (locFaction.getFlag(FFlag.PVP) == false)
 		{
-			if (notify) attacker.msg("<i>PVP is disabled in %s.", locFaction.describeTo(attacker));
+			if (notify) attacker.msg(Language.getInstance().pvpDisabled, locFaction.describeTo(attacker));
 			return false;
 		}
 
@@ -313,7 +314,7 @@ public class FactionsEntityListener implements Listener
 
 		if (attackFaction.isNone() && Conf.disablePVPForFactionlessPlayers)
 		{
-			if (notify) attacker.msg("<i>You can't hurt other players until you join a faction.");
+			if (notify) attacker.msg(Language.getInstance().pvpDisabledJoinFaction);
 			return false;
 		}
 		else if (defendFaction.isNone())
@@ -325,7 +326,7 @@ public class FactionsEntityListener implements Listener
 			}
 			else if (Conf.disablePVPForFactionlessPlayers)
 			{
-				if (notify) attacker.msg("<i>You can't hurt players who are not currently in a faction.");
+				if (notify) attacker.msg(Language.getInstance().pvpAttackedFactionless);
 				return false;
 			}
 		}
@@ -335,7 +336,7 @@ public class FactionsEntityListener implements Listener
 		// Check the relation
 		if (defender.hasFaction() && relation.isAtLeast(Conf.friendlyFireFromRel) && defLocFaction.getFlag(FFlag.FRIENDLYFIRE) == false)
 		{
-			if (notify) attacker.msg("<i>You can't hurt %s<i>.", relation.getDescPlayerMany());
+			if (notify) attacker.msg(Language.getInstance().pvpCannotHurt, relation.getDescPlayerMany());
 			return false;
 		}
 
@@ -345,8 +346,8 @@ public class FactionsEntityListener implements Listener
 		{
 			if (notify)
 			{
-				attacker.msg("<i>You can't hurt %s<i> in their own territory unless you declare them as an enemy.", defender.describeTo(attacker));
-				defender.msg("%s<i> tried to hurt you.", attacker.describeTo(defender, true));
+				attacker.msg(Language.getInstance().pvpCannotHurtTerritory, defender.describeTo(attacker));
+				defender.msg(Language.getInstance().pvpAttempt, attacker.describeTo(defender, true));
 			}
 			return false;
 		}
@@ -429,7 +430,7 @@ public class FactionsEntityListener implements Listener
 			return;
 		}
 
-		if ( ! FactionsBlockListener.playerCanBuildDestroyBlock((Player)breaker, event.getEntity().getLocation().getBlock(), "remove paintings", false))
+		if ( ! FactionsBlockListener.playerCanBuildDestroyBlock((Player)breaker, event.getEntity().getLocation().getBlock(), Language.getInstance().actionRemovePaintings, false))
 		{
 			event.setCancelled(true);
 		}
@@ -440,7 +441,7 @@ public class FactionsEntityListener implements Listener
 	{
 		if (event.isCancelled()) return;
 
-		if ( ! FactionsBlockListener.playerCanBuildDestroyBlock(event.getPlayer(), event.getBlock().getLocation().getBlock(), "place paintings", false) )
+		if ( ! FactionsBlockListener.playerCanBuildDestroyBlock(event.getPlayer(), event.getBlock().getLocation().getBlock(), Language.getInstance().actionPlacePaintings, false) )
 		{
 			event.setCancelled(true);
 		}

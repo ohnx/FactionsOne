@@ -9,6 +9,7 @@ import com.massivecraft.factions.event.FPlayerJoinEvent;
 import com.massivecraft.factions.struct.Permission;
 import com.massivecraft.factions.struct.Rel;
 import com.massivecraft.factions.util.RelationUtil;
+import de.erethon.factionsone.Language;
 
 public class CmdLeader extends FCommand
 {	
@@ -52,7 +53,7 @@ public class CmdLeader extends FCommand
 			// Follow the standard rules
 			if (fme.getRole() != Rel.LEADER || targetFaction != myFaction)
 			{
-				sender.sendMessage(p.txt.parse("<b>You must be leader of the faction to %s.", this.getHelpShort()));
+				sender.sendMessage(p.txt.parse(Language.getInstance().playerMustBeLeader, this.getHelpShort()));
 				return;
 			}
 			

@@ -35,6 +35,7 @@ import com.massivecraft.factions.util.AutoLeaveTask;
 import com.massivecraft.factions.util.EconLandRewardTask;
 import com.massivecraft.factions.util.LazyLocation;
 import com.massivecraft.factions.zcore.MPlugin;
+import de.erethon.factionsone.Language;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -95,6 +96,7 @@ public class P extends MPlugin
 		Essentials.setup();
 		Econ.setup();
 		
+                Language.getInstance().reload();
 		if(Conf.worldGuardChecking)
 		{
 			Worldguard.init(this);

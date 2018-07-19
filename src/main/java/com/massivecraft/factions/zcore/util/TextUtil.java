@@ -1,5 +1,6 @@
 package com.massivecraft.factions.zcore.util;
 
+import de.erethon.factionsone.Language;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -202,12 +203,12 @@ public class TextUtil
 		
 		if (pagecount == 0)
 		{
-			ret.add(this.parseTags("<i>Sorry. No Pages available."));
+			ret.add(this.parseTags(Language.getInstance().textNoPage));
 			return ret;
 		}
 		else if (pageZeroBased < 0 || pageHumanBased > pagecount)
 		{
-			ret.add(this.parseTags("<i>Invalid page. Must be between 1 and "+pagecount));
+			ret.add(this.parseTags(Language.getInstance().textPageInvalid+" "+pagecount));
 			return ret;
 		}
 		
@@ -271,17 +272,17 @@ public class TextUtil
 			unitCountParts.add(unitCount+" "+unitName);
 		}
 		
-		if (unitCountParts.size() == 0) return "just now";
+		if (unitCountParts.size() == 0) return Language.getInstance().timeJustNow;
 		
 		ret += implodeCommaAnd(unitCountParts);
 		ret += " ";
 		if (millis <= 0)
 		{
-			ret += "ago";
+			ret += Language.getInstance().timeAgo;
 		}
 		else
 		{
-			ret += "from now";
+			ret += Language.getInstance().timeFromNow;
 		}
 		
 		return ret;

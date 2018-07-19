@@ -1,5 +1,10 @@
 package com.massivecraft.factions.zcore;
 
+/**
+ * @deprecated
+ * FactionsOne uses {@link de.erethon.factionsone.Language}
+ */
+@Deprecated
 public class Lang
 {
 	public static final String permForbidden = "<b>You don't have permission to %s.";

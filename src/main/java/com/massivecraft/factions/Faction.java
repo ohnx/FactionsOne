@@ -14,6 +14,7 @@ import com.massivecraft.factions.struct.FPerm;
 import com.massivecraft.factions.struct.Rel;
 import com.massivecraft.factions.util.*;
 import com.massivecraft.factions.zcore.persist.Entity;
+import de.erethon.factionsone.Language;
 
 
 public class Faction extends Entity implements EconomyParticipator
@@ -84,7 +85,7 @@ public class Faction extends Entity implements EconomyParticipator
 		if (!Conf.homesMustBeInClaimedTerritory || this.home == null || (this.home.getLocation() != null && Board.getFactionAt(new FLocation(this.home.getLocation())) == this))
 			return;
 
-		msg("<b>Your faction home has been un-set since it is no longer in your territory.");
+		msg(Language.getInstance().factionHomeNotInTerritory);
 		this.home = null;
 	}
 	
@@ -199,7 +200,7 @@ public class Faction extends Entity implements EconomyParticipator
 		this.invites = new HashSet<String>();
 		this.open = Conf.newFactionsDefaultOpen;
 		this.tag = "???";
-		this.description = "Default faction description :(";
+		this.description = Language.getInstance().factionDefaultDesc;
 		this.money = 0.0;
 		this.powerBoost = 0.0;
 		this.flagOverrides = new LinkedHashMap<FFlag, Boolean>();
@@ -495,7 +496,7 @@ public class Faction extends Entity implements EconomyParticipator
 
 			for (FPlayer fplayer : FPlayers.i.getOnline())
 			{
-				fplayer.msg("The faction %s<i> was disbanded.", this.getTag(fplayer));
+				fplayer.msg(Language.getInstance().factionDisbanded, this.getTag(fplayer));
 			}
 
 			this.detach();
@@ -505,7 +506,7 @@ public class Faction extends Entity implements EconomyParticipator
 			if (oldLeader != null)
 				oldLeader.setRole(Rel.MEMBER);
 			replacements.get(0).setRole(Rel.LEADER);
-			this.msg("<i>Faction leader <h>%s<i> has been removed. %s<i> has been promoted as the new faction leader.", oldLeader == null ? "" : oldLeader.getName(), replacements.get(0).getName());
+			this.msg(Language.getInstance().factionLeaderKicked, oldLeader == null ? "" : oldLeader.getName(), replacements.get(0).getName());
 			P.p.log("Faction "+this.getTag()+" ("+this.getId()+") leader was removed. Replacement leader: "+replacements.get(0).getName());
 		}
 	}

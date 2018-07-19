@@ -18,6 +18,7 @@ import com.massivecraft.factions.struct.FFlag;
 import com.massivecraft.factions.struct.FPerm;
 import com.massivecraft.factions.struct.Rel;
 import com.massivecraft.factions.zcore.MCommand;
+import de.erethon.factionsone.Language;
 
 
 public abstract class FCommand extends MCommand<P>
@@ -101,19 +102,19 @@ public abstract class FCommand extends MCommand<P>
 		
 		if ( ! fplayer.hasFaction())
 		{
-			sender.sendMessage(p.txt.parse("<b>You are not member of any faction."));
+			sender.sendMessage(p.txt.parse(Language.getInstance().playerNoFaction));
 			return false;
 		}
 		
 		if (this.senderMustBeOfficer && ! fplayer.getRole().isAtLeast(Rel.OFFICER))
 		{
-			sender.sendMessage(p.txt.parse("<b>Only faction moderators can %s.", this.getHelpShort()));
+			sender.sendMessage(p.txt.parse(Language.getInstance().playerNotOfficer, this.getHelpShort()));
 			return false;
 		}
 		
 		if (this.senderMustBeLeader && ! fplayer.getRole().isAtLeast(Rel.LEADER))
 		{
-			sender.sendMessage(p.txt.parse("<b>Only faction admins can %s.", this.getHelpShort()));
+			sender.sendMessage(p.txt.parse(Language.getInstance().playerNotLeader, this.getHelpShort()));
 			return false;
 		}
 			
@@ -372,7 +373,7 @@ public abstract class FCommand extends MCommand<P>
 	{
 		if ( ! i.getFaction().equals(you.getFaction()))
 		{
-			i.sendMessage(p.txt.parse("%s <b>is not in the same faction as you.",you.describeTo(i, true)));
+			i.sendMessage(p.txt.parse(Language.getInstance().playerNotSameFaction, you.describeTo(i, true)));
 			return false;
 		}
 		
@@ -383,7 +384,7 @@ public abstract class FCommand extends MCommand<P>
 		
 		if (you.getRole().equals(Rel.LEADER))
 		{
-			i.sendMessage(p.txt.parse("<b>Only the faction admin can do that."));
+			i.sendMessage(p.txt.parse(Language.getInstance().permOnlyLeaders));
 		}
 		else if (i.getRole().equals(Rel.OFFICER))
 		{
@@ -393,12 +394,12 @@ public abstract class FCommand extends MCommand<P>
 			}
 			else
 			{
-				i.sendMessage(p.txt.parse("<b>Moderators can't control each other..."));
+				i.sendMessage(p.txt.parse(Language.getInstance().permOfficersControlEachOther));
 			}
 		}
 		else
 		{
-			i.sendMessage(p.txt.parse("<b>You must be a faction moderator to do that."));
+			i.sendMessage(p.txt.parse(Language.getInstance().permOnlyOfficers));
 		}
 		
 		return false;

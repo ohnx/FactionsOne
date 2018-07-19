@@ -17,6 +17,7 @@ import com.massivecraft.factions.FPlayers;
 import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.P;
 import com.massivecraft.factions.iface.RelationParticipator;
+import de.erethon.factionsone.Language;
 
 /**
  * Permissions that you (a player) may or may not have in the territory of a certain faction.
@@ -24,21 +25,21 @@ import com.massivecraft.factions.iface.RelationParticipator;
  */
 public enum FPerm
 {
-	BUILD("build", "edit the terrain",             Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY),
-	PAINBUILD("painbuild", "edit, take damage"),
-	DOOR("door", "use doors",                      Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY),
-	BUTTON("button", "use stone buttons",          Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY),
-	LEVER("lever", "use levers",                   Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY),
-	CONTAINER("container", "use containers",       Rel.LEADER, Rel.OFFICER, Rel.MEMBER),
-	INVITE("invite", "invite players",             Rel.LEADER, Rel.OFFICER),
-	KICK("kick", "kick members",                   Rel.LEADER, Rel.OFFICER),
-	SETHOME("sethome", "set the home",             Rel.LEADER, Rel.OFFICER),
-	WITHDRAW("withdraw", "withdraw money",         Rel.LEADER, Rel.OFFICER),
-	TERRITORY("territory", "claim or unclaim",     Rel.LEADER, Rel.OFFICER),
-	CAPE("cape", "set the cape",                   Rel.LEADER, Rel.OFFICER),
-	ACCESS("access", "grant territory",            Rel.LEADER, Rel.OFFICER),
-	DISBAND("disband", "disband the faction",      Rel.LEADER),
-	PERMS("perms", "manage permissions",           Rel.LEADER),
+	BUILD("build", Language.getInstance().fpermBuild,                Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY),
+	PAINBUILD("painbuild", Language.getInstance().fpermPainbuild),
+	DOOR("door", Language.getInstance().fpermDoor,                   Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY),
+	BUTTON("button", Language.getInstance().fpermButton,             Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY),
+	LEVER("lever", Language.getInstance().fpermLever,                Rel.LEADER, Rel.OFFICER, Rel.MEMBER, Rel.RECRUIT, Rel.ALLY),
+	CONTAINER("container", Language.getInstance().fpermContainer,    Rel.LEADER, Rel.OFFICER, Rel.MEMBER),
+	INVITE("invite", Language.getInstance().fpermInvite,             Rel.LEADER, Rel.OFFICER),
+	KICK("kick", Language.getInstance().fpermKick,                   Rel.LEADER, Rel.OFFICER),
+	SETHOME("sethome", Language.getInstance().fpermSetHome,          Rel.LEADER, Rel.OFFICER),
+	WITHDRAW("withdraw", Language.getInstance().fpermWithdraw,       Rel.LEADER, Rel.OFFICER),
+	TERRITORY("territory", Language.getInstance().fpermTerritory,    Rel.LEADER, Rel.OFFICER),
+	CAPE("cape", Language.getInstance().fpermCape,                   Rel.LEADER, Rel.OFFICER),
+	ACCESS("access", Language.getInstance().fpermAccess,             Rel.LEADER, Rel.OFFICER),
+	DISBAND("disband", Language.getInstance().fpermDisband,          Rel.LEADER),
+	PERMS("perms", Language.getInstance().fpermPerms,                Rel.LEADER),
 	;
 	
 	private final String nicename;
@@ -136,7 +137,6 @@ public enum FPerm
 		return TerritoryPerms.contains(this);
 	}
 
-	private static final String errorpattern = "%s<b> does not allow you to %s<b>.";
 	public boolean has(Object testSubject, Faction hostFaction, boolean informIfNot)
 	{
 		if (testSubject instanceof ConsoleCommandSender) return true;
@@ -166,10 +166,10 @@ public enum FPerm
 		if (!ret && informIfNot && rpSubject instanceof FPlayer)
 		{
 			FPlayer fplayer = (FPlayer)rpSubject;
-			fplayer.msg(errorpattern, hostFaction.describeTo(fplayer, true), this.getDescription());
+			fplayer.msg(Language.getInstance().actionDoesNotAllowYouTo, hostFaction.describeTo(fplayer, true), this.getDescription());
 			if (Permission.ADMIN.has(fplayer.getPlayer()))
 			{
-				fplayer.msg("<i>You can bypass by using " + P.p.cmdBase.cmdBypass.getUseageTemplate(false));
+				fplayer.msg(Language.getInstance().actionBypass + " " + P.p.cmdBase.cmdBypass.getUseageTemplate(false));
 			}
 		}
 		return ret;
@@ -194,7 +194,7 @@ public enum FPerm
 					else if (testSubject instanceof FPlayer)
 						notify = (FPlayer)testSubject;
 					if (notify != null)
-						notify.msg("<b>This territory owned by your faction has restricted access.");
+						notify.msg(Language.getInstance().factionTerritoryAccessRestricted);
 				}
 				return false;
 			}

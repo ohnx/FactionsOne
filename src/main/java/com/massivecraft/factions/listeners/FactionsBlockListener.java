@@ -24,6 +24,7 @@ import com.massivecraft.factions.Faction;
 import com.massivecraft.factions.P;
 import com.massivecraft.factions.struct.FFlag;
 import com.massivecraft.factions.struct.FPerm;
+import de.erethon.factionsone.Language;
 
 
 public class FactionsBlockListener implements Listener
@@ -78,7 +79,7 @@ public class FactionsBlockListener implements Listener
 		{
 			if (!justCheck)
 			{
-				me.msg("<b>It is painful to %s in the territory of %s<b>.", action, factionHere.describeTo(me));
+				me.msg(Language.getInstance().actionPainful, action, factionHere.describeTo(me));
 				player.damage(Conf.actionDeniedPainAmount);
 			}
 			return true;
@@ -93,7 +94,7 @@ public class FactionsBlockListener implements Listener
 		if (event.isCancelled()) return;
 		if ( ! event.canBuild()) return;
 
-		if ( ! playerCanBuildDestroyBlock(event.getPlayer(), event.getBlock(), "build", false))
+		if ( ! playerCanBuildDestroyBlock(event.getPlayer(), event.getBlock(), Language.getInstance().actionBuild, false))
 			event.setCancelled(true);
 	}
 
@@ -102,7 +103,7 @@ public class FactionsBlockListener implements Listener
 	{
 		if (event.isCancelled()) return;
 
-		if ( ! playerCanBuildDestroyBlock(event.getPlayer(), event.getBlock(), "destroy", false))
+		if ( ! playerCanBuildDestroyBlock(event.getPlayer(), event.getBlock(), Language.getInstance().actionDestroy, false))
 		{
 			event.setCancelled(true);
 		}
@@ -114,7 +115,7 @@ public class FactionsBlockListener implements Listener
 		if (event.isCancelled()) return;
 		if ( ! event.getInstaBreak()) return;
 
-		if (! playerCanBuildDestroyBlock(event.getPlayer(), event.getBlock(), "destroy", false))
+		if (! playerCanBuildDestroyBlock(event.getPlayer(), event.getBlock(), Language.getInstance().actionDestroy, false))
 		{
 			event.setCancelled(true);
 		}

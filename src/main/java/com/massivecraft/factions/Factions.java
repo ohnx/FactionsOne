@@ -18,6 +18,7 @@ import com.massivecraft.factions.struct.Rel;
 import com.massivecraft.factions.util.MiscUtil;
 import com.massivecraft.factions.zcore.persist.EntityCollection;
 import com.massivecraft.factions.zcore.util.TextUtil;
+import de.erethon.factionsone.Language;
 
 public class Factions extends EntityCollection<Faction>
 {
@@ -54,23 +55,23 @@ public class Factions extends EntityCollection<Faction>
 		if ( ! this.exists("0"))
 		{
 			Faction faction = this.create("0");
-			faction.setTag(ChatColor.DARK_GREEN+"Wilderness");
-			faction.setDescription("");
+			faction.setTag(ChatColor.DARK_GREEN+Language.getInstance().factionWildernessTag);
+			faction.setDescription(Language.getInstance().factionWildernessDesc);
 			this.setFlagsForWilderness(faction);
 		}
 		if ( ! this.exists("-1"))
 		{
 			Faction faction = this.create("-1");
-			faction.setTag("SafeZone");
-			faction.setDescription("Free from PVP and monsters");
+			faction.setTag(Language.getInstance().factionSafeZoneTag);
+			faction.setDescription(Language.getInstance().factionSafeZoneDesc);
 			
 			this.setFlagsForSafeZone(faction);
 		}
 		if ( ! this.exists("-2"))
 		{
 			Faction faction = this.create("-2");
-			faction.setTag("WarZone");
-			faction.setDescription("Not the safest place to be");
+			faction.setTag(Language.getInstance().factionWarZoneTag);
+			faction.setDescription(Language.getInstance().factionWarZoneDesc);
 			this.setFlagsForWarZone(faction);
 		}
 		
@@ -209,19 +210,19 @@ public class Factions extends EntityCollection<Faction>
 		
 		if(MiscUtil.getComparisonString(str).length() < Conf.factionTagLengthMin)
 		{
-			errors.add(P.p.txt.parse("<i>The faction tag can't be shorter than <h>%s<i> chars.", Conf.factionTagLengthMin));
+			errors.add(P.p.txt.parse(Language.getInstance().factionTagTooShort, Conf.factionTagLengthMin));
 		}
 		
 		if(str.length() > Conf.factionTagLengthMax)
 		{
-			errors.add(P.p.txt.parse("<i>The faction tag can't be longer than <h>%s<i> chars.", Conf.factionTagLengthMax));
+			errors.add(P.p.txt.parse(Language.getInstance().factionTagTooLong, Conf.factionTagLengthMax));
 		}
 		
 		for (char c : str.toCharArray())
 		{
 			if ( ! MiscUtil.substanceChars.contains(String.valueOf(c)))
 			{
-				errors.add(P.p.txt.parse("<i>Faction tag must be alphanumeric. \"<h>%s<i>\" is not allowed.", c));
+				errors.add(P.p.txt.parse(Language.getInstance().factionTagAlphaNum, c));
 			}
 		}
 		
@@ -276,7 +277,7 @@ public class Factions extends EntityCollection<Faction>
 				double reward = Conf.econLandReward * landCount / playerCount;
 				for (FPlayer player : players)
 				{
-					Econ.modifyMoney(player, reward, "to own faction land", "for faction owning " + landCount + " land divided among " + playerCount + " member(s)");
+					Econ.modifyMoney(player, reward, Language.getInstance().factionToOwnLand, Language.getInstance().factionForOwningLand + landCount + Language.getInstance().factionLandDevided + playerCount + " " + Language.getInstance().factionMembers);
 				}
 			}
 		}

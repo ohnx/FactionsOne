@@ -38,6 +38,7 @@ import com.massivecraft.factions.struct.Rel;
 import com.massivecraft.factions.struct.TerritoryAccess;
 import com.massivecraft.factions.util.VisualizeUtil;
 import de.erethon.factionsone.FactionsOneAPI;
+import de.erethon.factionsone.Language;
 
 
 public class FactionsPlayerListener implements Listener
@@ -139,9 +140,9 @@ public class FactionsPlayerListener implements Listener
 		if (! access.isDefault())
 		{
 			if (access.subjectHasAccess(me))
-				me.msg("<g>You have access to this area.");
+				me.msg(Language.getInstance().playerAreaAccessGranted);
 			else if (access.subjectAccessIsRestricted(me))
-				me.msg("<b>This area has restricted access.");
+				me.msg(Language.getInstance().playerAreaAccessRestricted);
 		}
 
 		if (me.getAutoClaimFor() != null)
@@ -179,7 +180,7 @@ public class FactionsPlayerListener implements Listener
 				if (count >= 10)
 				{
 					FPlayer me = FactionsOneAPI.getFPlayer(uuid);
-					me.msg("<b>Ouch, that is starting to hurt. You should give it a rest.");
+					me.msg(Language.getInstance().playerThatHurts);
 					player.damage(NumberConversions.floor((double)count / 10));
 				}
 			}
@@ -322,7 +323,7 @@ public class FactionsPlayerListener implements Listener
 		
 		if (me.hasFaction() && me.getFaction().getFlag(FFlag.PERMANENT) && isCommandInList(fullCmd, Conf.permanentFactionMemberDenyCommands))
 		{
-			me.msg("<b>You can't use the command \""+fullCmd+"\" because you are in a permanent faction.");
+			me.msg(Language.getInstance().factionCmdBlockedPermanent1+fullCmd+Language.getInstance().factionCmdBlockedPermanent2);
 			event.setCancelled(true);
 			return;
 		}
@@ -332,14 +333,14 @@ public class FactionsPlayerListener implements Listener
 		
 		if (rel == Rel.NEUTRAL && isCommandInList(fullCmd, Conf.territoryNeutralDenyCommands))
 		{
-			me.msg("<b>You can't use the command \""+fullCmd+"\" in neutral territory.");
+			me.msg(Language.getInstance().factionCmdBlockedNeutral1+fullCmd+Language.getInstance().factionCmdBlockedNeutral2);
 			event.setCancelled(true);
 			return;
 		}
 
 		if (rel == Rel.ENEMY && isCommandInList(fullCmd, Conf.territoryEnemyDenyCommands))
 		{
-			me.msg("<b>You can't use the command \""+fullCmd+"\" in enemy territory.");
+			me.msg(Language.getInstance().factionCmdBlockedEnemy1+fullCmd+Language.getInstance().factionCmdBlockedEnemy2);
 			event.setCancelled(true);
 			return;
 		}
@@ -378,7 +379,7 @@ public class FactionsPlayerListener implements Listener
 		}
 
 		// if player was banned (not just kicked), get rid of their stored info
-		if (Conf.removePlayerDataWhenBanned && event.getReason().equals("Banned by admin."))
+		if (Conf.removePlayerDataWhenBanned && event.getReason().equals(Language.getInstance().playerBannedByAdmin))
 		{
 			if (badGuy.getRole() == Rel.LEADER)
 				badGuy.getFaction().promoteNewLeader();

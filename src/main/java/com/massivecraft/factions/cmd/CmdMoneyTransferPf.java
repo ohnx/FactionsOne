@@ -5,6 +5,7 @@ import com.massivecraft.factions.iface.EconomyParticipator;
 import com.massivecraft.factions.P;
 import com.massivecraft.factions.integration.Econ;
 import com.massivecraft.factions.struct.Permission;
+import de.erethon.factionsone.Language;
 
 import org.bukkit.ChatColor;
 
@@ -22,7 +23,7 @@ public class CmdMoneyTransferPf extends FCommand
 		//this.optionalArgs.put("", "");
 		
 		this.permission = Permission.MONEY_P2F.node;
-		this.setHelpShort("transfer p -> f");
+		this.setHelpShort(Language.getInstance().helpMoneyTransferPfShort);
 		
 		senderMustBePlayer = false;
 		senderMustBeMember = false;
@@ -42,6 +43,6 @@ public class CmdMoneyTransferPf extends FCommand
 		boolean success = Econ.transferMoney(fme, from, to, amount);
 
 		if (success && Conf.logMoneyTransactions)
-			P.p.log(ChatColor.stripColor(P.p.txt.parse("%s transferred %s from the player \"%s\" to the faction \"%s\"", fme.getName(), Econ.moneyString(amount), from.describeTo(null), to.describeTo(null))));
+			P.p.log(ChatColor.stripColor(P.p.txt.parse(Language.getInstance().moneyTransferredPf, fme.getName(), Econ.moneyString(amount), from.describeTo(null), to.describeTo(null))));
 	}
 }
