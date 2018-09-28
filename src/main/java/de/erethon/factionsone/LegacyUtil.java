@@ -71,9 +71,9 @@ public class LegacyUtil {
             DOORS.add(Material.ACACIA_FENCE_GATE);
             DOORS.add(Material.DARK_OAK_FENCE_GATE);
             MATERIALS_WITH_HIGH_BLAST_RESISTANCE.add(COMMAND_BLOCK);
-            MATERIALS_WITH_HIGH_BLAST_RESISTANCE.add(Material.STRUCTURE_BLOCK);
             MATERIALS_WITH_HIGH_BLAST_RESISTANCE.add(Material.BARRIER);
             if (!is1_8) {
+                MATERIALS_WITH_HIGH_BLAST_RESISTANCE.add(Material.STRUCTURE_BLOCK);
                 MATERIALS_WITH_HIGH_BLAST_RESISTANCE.add(Material.END_GATEWAY);
             }
         }
