@@ -29,7 +29,7 @@ public class CmdHome extends FCommand
 		this.aliases.add("home");
 		
 		//this.requiredArgs.add("");
-		//this.optionalArgs.put("", "");
+		this.optionalArgs.put("faction", "your");
 		
 		this.permission = Permission.HOME.node;
 		this.disableOnLock = false;
@@ -56,22 +56,38 @@ public class CmdHome extends FCommand
 			return;
 		}
 		
+		Faction targetFaction = this.argAsFaction(0);
+		bool isOtherTargetFaction = true;
+		if (targetFaction == null)
+		{
+			targetFaction = myFaction;
+			isOtherTargetFaction = false;
+		}
+		else if (myFaction.getRelationTo(targetFaction, true) != Rel.ALLY)
+		{
+			// check that they are allies
+			fme.msg("<b>You are not allied with that faction.");
+			fme.sendMessage(p.cmdBase.cmdSethome.getUseageTemplate());
+			return;
+		}
+		
 		if ( ! myFaction.hasHome())
 		{
-			fme.msg("<b>Your faction does not have a home. " + (fme.getRole().isLessThan(Rel.OFFICER) ? "<i> Ask your leader to:" : "<i>You should:"));
+			if (isOtherTargetFaction) fme.msg("<b>That faction does not have a home. ");
+			else fme.msg("<b>Your faction does not have a home. " + (fme.getRole().isLessThan(Rel.OFFICER) ? "<i> Ask your leader to:" : "<i>You should:"));
 			fme.sendMessage(p.cmdBase.cmdSethome.getUseageTemplate());
 			return;
 		}
 		
 		if ( ! Conf.homesTeleportAllowedFromEnemyTerritory && fme.isInEnemyTerritory())
 		{
-			fme.msg("<b>You cannot teleport to your faction home while in the territory of an enemy faction.");
+			fme.msg("<b>You cannot teleport to " + (isOtherTargetFaction?"someone else's":"your") + " faction home while in the territory of an enemy faction.");
 			return;
 		}
 		
 		if ( ! Conf.homesTeleportAllowedFromDifferentWorld && me.getWorld().getUID() != myFaction.getHome().getWorld().getUID())
 		{
-			fme.msg("<b>You cannot teleport to your faction home while in a different world.");
+			fme.msg("<b>You cannot teleport to " + (isOtherTargetFaction?"someone else's":"your") + " faction home while in a different world.");
 			return;
 		}
 		
@@ -120,7 +136,7 @@ public class CmdHome extends FCommand
 				if (dx > max || dy > max || dz > max)
 					continue;
 
-				fme.msg("<b>You cannot teleport to your faction home while an enemy is within " + Conf.homesTeleportAllowedEnemyDistance + " blocks of you.");
+				fme.msg("<b>You cannot teleport to " + (isOtherTargetFaction?"someone else's":"your") + " faction home while an enemy is within " + Conf.homesTeleportAllowedEnemyDistance + " blocks of you.");
 				return;
 			}
 		}
@@ -129,7 +145,7 @@ public class CmdHome extends FCommand
 		if (Essentials.handleTeleport(me, myFaction.getHome())) return;
 
 		// if economy is enabled, they're not on the bypass list, and this command has a cost set, make 'em pay
-		if ( ! payForCommand(Conf.econCostHome, "to teleport to your faction home", "for teleporting to your faction home")) return;
+		if ( ! payForCommand(Conf.econCostHome, "to teleport to " + (isOtherTargetFaction?"someone else's":"your") + " faction home", "for teleporting to " + (isOtherTargetFaction?"someone else's":"your") + " faction home")) return;
 
 		// Create a smoke effect
 		if (Conf.homesTeleportCommandSmokeEffectEnabled)
