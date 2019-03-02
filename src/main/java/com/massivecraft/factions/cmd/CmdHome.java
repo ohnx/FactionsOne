@@ -57,7 +57,7 @@ public class CmdHome extends FCommand
 		}
 		
 		Faction targetFaction = this.argAsFaction(0);
-		bool isOtherTargetFaction = true;
+		boolean isOtherTargetFaction = true;
 		if (targetFaction == null)
 		{
 			targetFaction = myFaction;
